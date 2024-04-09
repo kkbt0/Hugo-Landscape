@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://kkbt0.github.io/Hugo-Landscape/'
 # baseURL = 'https://example.org/public/'
 languageCode = 'zh-CN'
 title = 'Hugo-Landscape'
@@ -11,7 +11,7 @@ description = "浮生若梦，为欢几何"
 
 [params]
   title = "Hugo-Landscape"
-  description = "我们的目标是星辰大海！"
+  description = "我们的征途是星辰大海！"
 
 [taxonomies]
 author = "authors"

@@ -4,6 +4,8 @@ title: 关于
 
 # About
 
+主题 Hugo-Landscape https://github.com/kkbt0/Hugo-Landscape
+
 移植自 [Hexo-Theme-vivia](https://github.com/saicaca/hexo-theme-vivia) 以及 [Astro-Theme-Fuwari](https://github.com/saicaca/fuwari)
 部分代码参考 [Hugo-Theme-DoIt](https://github.com/HEIGE-PCloud/DoIt)
 而 vivia 是 Hexo Landscape 修改来的。
