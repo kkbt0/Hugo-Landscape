@@ -1,0 +1,7 @@
+<div class="flex gap-2 flex-wrap">
+    {{ range .Site.Taxonomies.tags }}
+    <a href="{{ .Page.RelPermalink }}" aria-label="{{ .Page.Title }}" class="btn-regular h-8 text-sm px-3 rounded-lg">
+        {{ .Page.Title }}
+    </a>
+    {{ end }}
+</div>

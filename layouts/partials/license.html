@@ -1,0 +1,29 @@
+<div class="mb-6 rounded-xl license-container onload-animation
+relative transition overflow-hidden bg-[var(--license-block-bg)] py-5 px-6">
+    <div class="transition font-bold text-black/75 dark:text-white/75">
+        {{ .Title }}
+    </div>
+    <a href="{{ .Permalink }}" class="link text-[var(--primary)]">
+        {{ .Permalink }}
+    </a>
+    <div class="flex gap-6 mt-2">
+        <div>
+            <div class="transition text-black/30 dark:text-white/30 text-sm">作者</div>
+            <div class="transition text-black/75 dark:text-white/75 whitespace-nowrap">{{ .Site.Params.Author.name }}</div>
+        </div>
+        <div>
+            <div class="transition text-black/30 dark:text-white/30 text-sm">发布于</div>
+            <div class="transition text-black/75 dark:text-white/75 whitespace-nowrap">
+                {{ .Date | time.Format "2006-01-02" }}
+            </div>
+        </div>
+        <div>
+            <div class="transition text-black/30 dark:text-white/30 text-sm">许可</div>
+            <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank"
+                class="link text-[var(--primary)] whitespace-nowrap">
+                CC BY-NC-SA 4.0
+            </a>
+        </div>
+    </div>
+    <div class="i-mdi-creative-commons transition absolute pointer-events-none right-6 top-1/2 -translate-y-1/2 text-black/5 dark:text-white/5" style="font-size: 20rem;"></div>
+</div>

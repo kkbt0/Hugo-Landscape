@@ -1,0 +1,55 @@
+<div class="back-to-top-wrapper lg:block">
+    <div id="back-to-top-btn" class="back-to-top-btn hide flex items-center rounded-2xl overflow-hidden transition" onclick="backToTop()">
+        <button aria-label="Back to Top" class="btn-card h-[3.75rem] w-[3.75rem] border-none">
+            <div class="i-mdi-arrow-top"></div>
+        </button>
+    </div>
+</div>
+
+<style>
+.back-to-top-wrapper {
+	 width: 3.75rem;
+	 height: 3.75rem;
+	 position: absolute;
+	 right: 0;
+	 top: 0;
+}
+ .back-to-top-btn {
+	 color: var(--primary);
+	 font-size: 2.25rem;
+	 font-weight: bold;
+	 border: none;
+	 position: fixed;
+	 bottom: 15rem;
+	 opacity: 1;
+	 cursor: pointer;
+	 transform: translateX(5rem);
+}
+ .back-to-top-btn i {
+	 font-size: 1.75rem;
+}
+ .back-to-top-btn.hide {
+	 transform: translateX(5rem) scale(0.9);
+	 opacity: 0;
+	 pointer-events: none;
+}
+ .back-to-top-btn:active {
+	 transform: translateX(5rem) scale(0.9);
+}
+</style>
+
+<script>
+function backToTop() {
+    window.scroll({ top: 0, behavior: 'smooth' });
+}
+
+function scrollFunction() {
+    let btn = document.getElementById('back-to-top-btn');
+    if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+        btn.classList.remove('hide')
+    } else {
+        btn.classList.add('hide')
+    }
+}
+window.onscroll = scrollFunction
+</script>

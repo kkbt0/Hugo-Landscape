@@ -1,0 +1,27 @@
+baseURL = 'https://example.org/'
+# baseURL = 'https://example.org/public/'
+languageCode = 'zh-CN'
+title = 'Hugo-Landscape'
+theme = "../.."
+
+[params.author]
+name = "恐咖兵糖"
+homepage ="https://www.ftls.xyz"
+description = "浮生若梦，为欢几何"
+
+[params]
+  title = "Hugo-Landscape"
+  description = "我们的目标是星辰大海！"
+
+[taxonomies]
+author = "authors"
+category = "categories"
+tag = "tags"
+series = "series"
+
+[markup.goldmark.renderer]
+    hardWraps = true
+    
+[Permalinks]
+  # posts = ":year/:month/:filename"
+  posts = "/posts/:slug"

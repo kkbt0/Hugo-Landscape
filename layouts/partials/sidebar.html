@@ -1,0 +1,40 @@
+<div id="sidebar"
+    class="w-full row-start-3 row-end-4 col-span-2 lg:row-start-2 lg:row-end-3 lg:col-span-1 lg:max-w-[17.5rem] onload-animation">
+    <div class="flex flex-col w-full gap-4 mb-4">
+        {{ partial "sidebar/profile.html" . }}
+    </div>
+    <div class="flex flex-col w-full gap-4 top-4 sticky">
+        <!-- <Categories class="onload-animation" style="animation-delay: 150ms">Categories</Categories>
+        <Tag class="onload-animation" style="animation-delay: 200ms">Tag</Tag> -->
+
+        <widget-layout id="categories-widget" class="pb-4 card-base ">
+            <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
+                before:content-['']
+                before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+                before:absolute before:left-[-16px] before:top-[5.5px]">
+                Categories
+            </div>
+            <div id="categories" class="collapse-wrapper px-4 overflow-hidden "> <!-- class collapsed-->
+                {{ partial "sidebar/categories.html" . }}
+            </div>
+            <!-- TODO 展开 -->
+            <!-- <div class="expand-btn px-4 -mb-2">
+                <button class="btn-plain w-full h-9 rounded-lg border-none">
+                    <div class="text-[var(--primary)] flex items-center justify-center gap-2 -translate-x-2">
+                        ...
+                    </div>
+                </button>
+            </div> -->
+        </widget-layout>
+
+        <widget-layout id="tags-widget" class="pb-4 card-base ">
+            <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
+                before:content-['']
+                before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+                before:absolute before:left-[-16px] before:top-[5.5px]">Tag</div>
+            <div id="tags" class="collapse-wrapper px-4 overflow-hidden">
+                {{ partial "sidebar/tags.html" . }}
+            </div>
+        </widget-layout>
+    </div>
+</div>

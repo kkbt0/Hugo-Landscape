@@ -1,0 +1,25 @@
+{
+  "name": "Hugo-Landscape",
+  "version": "0.1.0",
+  "description": "Hugo Theme Hugo-Landscape",
+  "main": "index.js",
+  "scripts": {
+    "dev": "unocss \"layouts/**/*.html\" -o ./assets/style.css --watch",
+    "build": "unocss \"layouts/**/*.html\" -o ./assets/style.css "
+  },
+  "keywords": [
+    "Hugo",
+    "Theme"
+  ],
+  "author": "恐咖兵糖",
+  "license": "MIT",
+  "devDependencies": {
+    "@iconify-json/carbon": "^1.1.31",
+    "@iconify-json/mdi": "^1.1.66",
+    "@unocss/cli": "0.59.0-beta.1",
+    "unocss": "0.59.0-beta.1"
+  },
+  "dependencies": {
+    "@unocss/reset": "^0.59.0"
+  }
+}

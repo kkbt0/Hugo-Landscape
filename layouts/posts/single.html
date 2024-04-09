@@ -1,0 +1,94 @@
+{{ define "main" }}
+<!-- <h1>{{ .Title }}</h1>
+
+  {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+  {{ $dateHuman := .Date | time.Format ":date_long" }}
+  <time datetime="{{ $dateMachine }}">{{ $dateHuman }}</time>
+
+  {{ .Content }}
+  {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }} -->
+<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
+  <div id="post-container" class="card-base z-10 px-6 md:px-9 pt-6 pb-4 relative w-full ">
+    <!-- word count and reading time -->
+    <div class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation">
+      <div class="flex flex-row items-center">
+        <div
+          class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+          <div class="i-mdi-pen"></div>
+        </div>
+        <div class="text-sm">约 {{ .WordCount }} 字</div>
+      </div>
+      <div class="flex flex-row items-center">
+        <div
+          class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2">
+          <div class="i-mdi-clock-outline"></div>
+        </div>
+        <div class="text-sm">预计阅读 {{ .ReadingTime }} 分钟</div>
+      </div>
+    </div>
+
+    <!-- title -->
+    <div class="relative onload-animation">
+      <div data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title" class="transition w-full block font-bold mb-3
+                text-3xl md:text-[2.5rem]/[2.75rem]
+                text-black/90 dark:text-white/90
+                md:before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+                before:absolute before:top-[0.75rem] before:left-[-1.125rem]
+            ">
+        {{ .Title }}
+      </div>
+    </div>
+
+    <!-- metadata -->
+    {{- $haveCover := false -}}
+    {{- if .Params.featuredImage -}}{{- $haveCover = true -}}{{- end -}}
+    <div class="onload-animation">
+      {{ partial "meta.html" . }}
+      <!-- TODO 无文章图 hr 占位-->
+      {{- if not $haveCover -}}
+        <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>
+      {{- end -}}
+    </div>
+
+    <!-- always show cover as long as it has one -->
+    {{- if $haveCover -}}
+      <div class="mb-8 rounded-xl banner-container onload-animation overflow-hidden relative">
+        <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
+        <img src="{{ .Params.featuredImage }}" alt="Cover Image of the Post" class="w-full h-full object-center object-cover" />
+      </div>
+    {{- end -}}
+
+    <!-- markdown content -->
+    <article class="mb-6 prose dark:prose-invert prose-base max-w-none custom-md">
+      {{ .Content }}
+    </article>
+    {{ partial "license.html" . }}
+  </div>
+</div>
+
+<div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
+  {{ with .PrevInSection }}
+  <a href="{{ .RelPermalink }}" class="w-full font-bold overflow-hidden active:scale-95">
+    <div class="btn-card rounded-2xl h-[3.75rem] max-w-full px-4 flex items-center justify-start gap-4">
+      <div class="i-mdi-arrow-left text-[var(--primary)] text-2xl"></div>
+      <div
+        class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
+        {{ .Title }}
+      </div>
+    </div>
+  </a>
+  {{ end }}
+  {{ with .NextInSection }}
+  <a href="{{ .RelPermalink }}" class="w-full font-bold overflow-hidden active:scale-95">
+    <div class="btn-card rounded-2xl h-[3.75rem] max-w-full px-4 flex items-center justify-end gap-4">
+      <div
+        class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
+        {{ .Title }}
+      </div>
+      <div class="i-mdi-arrow-right text-[var(--primary)] text-2xl"></div>
+    </div>
+  </a>
+  {{ end }}
+</div>
+
+{{ end }}

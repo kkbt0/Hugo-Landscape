@@ -1,0 +1,24 @@
+<div class="card-base">
+    <a aria-label="Go to About Page" href="{{ relURL "about/" }}" class="group block relative mx-auto mt-4 lg:mx-3 lg:mt-3 mb-3
+       max-w-[240px] lg:max-w-none overflow-hidden rounded-xl active:scale-95">
+        <div class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
+        w-full h-full z-50 flex items-center justify-center">
+            <div
+                class="transition opacity-0 group-hover:opacity-100 text-white text-5xl i-mdi-card-account-details-outline">
+            </div>
+        </div>
+        <div class="mx-auto lg:w-full h-full lg:mt-0 overflow-hidden relative">
+            <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
+            <img src="{{ relURL "img/demo-avatar.webp" }}" alt="Profile Image of the Author" class="w-full h-full object-center object-cover mx-auto lg:w-full h-full lg:mt-0" />
+        </div>
+    </a>
+    <div class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition">{{ .Site.Params.Author.name }}</div>
+    <div class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"></div>
+    <div class="text-center text-neutral-400 mb-2.5 transition">{{ .Site.Params.Author.description }}</div>
+    <div class="flex gap-2 mx-2 justify-center mb-4">
+        <a aria-label="Home" href="{{ .Site.Params.Author.homepage }}" target="_blank"
+            class="btn-regular rounded-lg h-10 w-10 active:scale-90">
+            <div class="i-carbon-home text-xl"></div>
+        </a>
+    </div>
+</div>

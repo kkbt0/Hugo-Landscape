@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="{{ or site.Language.LanguageCode site.Language.Lang }}"
+  dir="{{ or site.Language.LanguageDirection `ltr` }}" class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px] dark"> 
+
+<head>
+  {{ partial "head.html" . }}
+  {{- /* Paginate  */ -}}
+  {{- /* Paginate in here, To solve the problem of the canonical URL being the same in the pagination */ -}}
+  {{- /* see more https://github.com/gohugoio/hugo/issues/4507 */ -}}
+  {{- /* see more https://discourse.gohugo.io/t/control-pagination-and-page-collections-from-baseof-html/37643/8 */ -}}
+  {{- /* see more https://discourse.gohugo.io/t/determine-if-current-page-is-result-of-pagination/37494/4 */ -}}
+  {{- partial "head/paginator.html" . -}}
+</head>
+
+<!-- TODO: temporarily make banner height same for all pages since I cannot make the transition feel good
+I want to make the height transition parallel with the content transition instead of blocking it -->
+<body class="min-h-screen transition">
+  <!-- MainGridLayout -->
+  <div class="max-w-[var(--page-width)] min-h-screen grid grid-cols-[17.5rem_auto] grid-rows-[auto_auto_1fr_auto] lg:grid-rows-[auto_1fr_auto]
+    mx-auto gap-4 relative px-0 md:px-4">
+    <div id="top-row" class="col-span-2 grid-rows-1 z-50 onload-animation">
+      <div class="absolute h-8 left-0 right-0 -top-8 bg-[var(--card-bg)] transition"> </div>
+      <!-- used for onload animation -->
+      {{ partial "nav.html" . }}
+      <!-- <header>
+        {{ partial "header.html" . }}
+      </header> -->
+    </div>
+    <!-- <SideBar
+      class="row-start-3 row-end-4 col-span-2 lg:row-start-2 lg:row-end-3 lg:col-span-1 lg:max-w-[17.5rem] onload-animation">
+    SideBar</SideBar> -->
+    {{ partial "sidebar.html" . }}
+
+    <div id="content-wrapper" class="row-start-2 row-end-3 col-span-2 lg:col-span-1 overflow-hidden onload-animation">
+      <!-- the overflow-hidden here prevent long text break the layout-->
+      <main id="swup" class="transition-fade">
+        {{ block "main" . }}{{ end }}
+      </main>
+
+    </div>
+
+    <div id="footer" class="grid-rows-3 col-span-2 mt-4 onload-animation">
+      <footer>
+        {{ partial "footer.html" . }}
+      </footer>
+    </div>
+    {{ partial "partials/back2top.html" . }}
+  </div>
+</body>
+{{ partialCached "head/js.html" . }}
+<!-- <script src="https://unpkg.com/@swup/scripts-plugin@2"></script> -->
+<script data-swup-ignore-script> 
+    const swup = new Swup({
+      plugins: [new SwupPreloadPlugin()]
+    });
+</script>
+</html>

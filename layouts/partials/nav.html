@@ -1,0 +1,56 @@
+<div
+    class="card-base sticky top-0 overflow-visible max-w-[var(--page-width)] h-[4.5rem] rounded-t-none mx-auto flex items-center justify-between px-4">
+    <a href="{{ relURL "" }}" class="btn-plain h-[3.25rem] px-5 font-bold rounded-lg active:scale-95">
+        <div class="flex flex-row text-[var(--primary)] items-center text-md">
+            <!-- <Icon name="material-symbols:home-outline-rounded" size={"1.75rem"} class="mb-1 mr-2" /> -->
+            {{ .Site.Title }}
+        </div>
+    </a>
+    <div class="hidden md:flex">
+        <a aria-label="文章" href="{{ relURL "posts/" }}" class="btn-plain h-11 font-bold px-5 rounded-lg active:scale-95">
+            <div class="flex items-center">
+                文章
+            </div>
+        </a>
+        <a aria-label="分类" href="{{ relURL "categories/" }}" class="btn-plain h-11 font-bold px-5 rounded-lg active:scale-95">
+            <div class="flex items-center">
+                分类
+            </div>
+        </a>
+        <a aria-label="标签" href="{{ relURL "tags/" }}" class="btn-plain h-11 font-bold px-5 rounded-lg active:scale-95">
+            <div class="flex items-center">
+                标签
+            </div>
+        </a>
+    </div>
+    <div class="flex">
+        <button aria-label="Light/Dark Mode" class="btn-plain h-11 w-11 rounded-lg active:scale-90 border-none" id="scheme-switch">
+            <div class="absolute opacity-[var(--display-light-icon)] i-carbon-sun text-xl"></div>
+            <div class="absolute opacity-[var(--display-dark-icon)] i-carbon-moon text-xl"></div>
+        </button>
+        <button aria-label="Menu" name="Nav Menu" class="btn-plain w-11 h-11 rounded-lg active:scale-90 md:hidden border-none"
+            id="nav-menu-switch">
+            <div class="i-mdi-menu"></div>
+        </button>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="nav-menu-panel" class="float-panel closed absolute transition-all fixed right-4 px-2 py-2">
+        <a href="{{ relURL "posts/" }}" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+                hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition">
+            <div
+                class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]">
+                posts 
+            </div>
+            <svg data-icon="material-symbols:chevron-right-rounded" height="20" viewBox="0 0 24 24" width="20" class="transition text-[var(--primary)]"><symbol id="ai:material-symbols:chevron-right-rounded"><path d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375q0 .2-.062.375t-.213.325l-4.6 4.6q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7z" fill="currentColor"></path></symbol><use xlink:href="#ai:material-symbols:chevron-right-rounded"></use></svg>
+        </a>
+        <a href="{{ relURL "tags/" }}" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition">
+            <div
+                class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]">
+                tags
+            </div>
+            <svg data-icon="material-symbols:chevron-right-rounded" height="20" viewBox="0 0 24 24" width="20" class="transition text-[var(--primary)]"><symbol id="ai:material-symbols:chevron-right-rounded"><path d="M12.6 12L8.7 8.1q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l4.6 4.6q.15.15.213.325t.062.375q0 .2-.062.375t-.213.325l-4.6 4.6q-.275.275-.7.275t-.7-.275q-.275-.275-.275-.7t.275-.7z" fill="currentColor"></path></symbol><use xlink:href="#ai:material-symbols:chevron-right-rounded"></use></svg>
+        </a>
+    </div>
+
+</div>

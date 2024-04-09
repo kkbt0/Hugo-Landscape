@@ -1,0 +1,59 @@
+{{- if gt .Paginator.TotalPages 1 -}}
+
+<div class="flex flex-row gap-3 justify-center mx-auto onload-animation">
+    {{- .Scratch.Set "paginator.ellipsed" false -}}
+    
+    {{ if .Paginator.HasPrev }}
+        <a href="{{ .Paginator.Prev.URL }}" aria-label="Previous Page"
+        class="btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11">
+            <div class="i-mdi-arrow-left text-xl"></div>
+        </a>
+    {{ else }}
+        <a href="" aria-label="Previous Page"
+        class="btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11 disabled">
+            <div class="i-mdi-arrow-left text-xl"></div>
+        </a>
+    {{ end }}
+
+    <div class="bg-[var(--card-bg)] flex flex-row rounded-lg items-center text-neutral-700 dark:text-neutral-300 font-bold">
+    {{- range $.Paginator.Pagers -}}
+    {{- $right := sub .TotalPages .PageNumber -}}
+    {{- $showNumber := or (le .PageNumber 1) (eq $right 0) -}}
+    {{- $showNumber := or $showNumber (and (gt .PageNumber (sub $.Paginator.PageNumber 3)) (lt .PageNumber (add
+    $.Paginator.PageNumber 3))) -}}
+    {{- if $showNumber -}}
+    {{- $.Scratch.Set "paginator.ellipsed" false -}}
+    {{- $.Scratch.Set "paginator.shouldEllipse" false -}}
+    {{- else -}}
+    {{- $.Scratch.Set "paginator.shouldEllipse" (not ($.Scratch.Get "paginator.ellipsed") ) -}}
+    {{- $.Scratch.Set "paginator.ellipsed" true -}}
+    {{- end -}}
+    {{- if $showNumber -}}
+        {{ if eq . $.Paginator }}
+        <div class="h-11 w-11 rounded-lg bg-[var(--primary)] flex items-center justify-center
+        font-bold text-white dark:text-black/70">{{- .PageNumber -}}</div>
+        {{ else }}
+        <a href="{{ .URL }}" aria-label="Page {{- .PageNumber -}}"
+            class="btn-card w-11 h-11 rounded-lg overflow-hidden active:scale-[0.85]">{{- .PageNumber -}}</a>
+        {{ end }}
+    {{- else if ($.Scratch.Get "paginator.shouldEllipse") -}}
+    <!-- <li class="page-item ">
+        <span class="page-link" aria-hidden="true">&hellip;</span>
+    </li> -->
+    <span>&hellip;</span>
+    {{- end -}}
+    {{- end -}}
+    </div>
+    {{ if .Paginator.HasNext }}
+        <a href="{{ .Paginator.Next.URL }}" aria-label="Next Page"
+        class="btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11">
+        <div class="i-mdi-arrow-right text-xl"></div>
+        </a>
+    {{ else }}
+        <a href="" aria-label="Next Page"
+        class="btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11 disabled">
+        <div class="i-mdi-arrow-right text-xl"></div>
+        </a>
+    {{ end }}
+</div>
+{{- end -}}

@@ -1,0 +1,779 @@
+:root {
+  --hue: 250;
+  --page-width: 75rem;
+}
+
+:root {
+  --radius-large: 1rem;
+  --banner-height-home: 60vh;
+  --banner-height: 40vh;
+  --content-delay: .15s
+}
+
+:root {
+  --primary: oklch(0.7 0.14 var(--hue));
+  --page-bg: oklch(0.95 0.01 var(--hue));
+  --card-bg: white;
+  --btn-content: oklch(0.55 0.12 var(--hue));
+  --btn-regular-bg: oklch(0.95 0.025 var(--hue));
+  --btn-regular-bg-hover: oklch(0.9 0.05 var(--hue));
+  --btn-regular-bg-active: oklch(0.85 0.08 var(--hue));
+  --btn-plain-bg-hover: oklch(0.95 0.025 var(--hue));
+  --btn-plain-bg-active: oklch(0.98 0.01 var(--hue));
+  --btn-card-bg-hover: oklch(0.98 0.005 var(--hue));
+  --btn-card-bg-active: oklch(0.9 0.03 var(--hue));
+  --enter-btn-bg: var(--btn-regular-bg);
+  --enter-btn-bg-hover: var(--btn-regular-bg-hover);
+  --enter-btn-bg-active: var(--btn-regular-bg-active);
+  --deep-text: oklch(0.25 0.02 var(--hue));
+  --title-active: oklch(0.6 0.1 var(--hue));
+  --line-divider: rgba(0, 0, 0, 0.08);
+  --line-color: rgba(0, 0, 0, 0.1);
+  --meta-divider: rgba(0, 0, 0, 0.2);
+  --inline-code-bg: var(--btn-regular-bg);
+  --inline-code-color: var(--btn-content);
+  --selection-bg: oklch(0.9 0.05 var(--hue));
+  --codeblock-selection: oklch(0.4 0.08 var(--hue));
+  --codeblock-bg: oklch(0.2 0.015 var(--hue));
+  --license-block-bg: rgba(0, 0, 0, 0.03);
+  --link-underline: oklch(0.93 0.04 var(--hue));
+  --link-hover: oklch(0.95 0.025 var(--hue));
+  --link-active: oklch(0.9 0.05 var(--hue));
+  --float-panel-bg: white;
+  --scrollbar-bg-light: rgba(0, 0, 0, 0.4);
+  --scrollbar-bg-hover-light: rgba(0, 0, 0, 0.5);
+  --scrollbar-bg-active-light: rgba(0, 0, 0, 0.6);
+  --scrollbar-bg-dark: rgba(255, 255, 255, 0.4);
+  --scrollbar-bg-hover-dark: rgba(255, 255, 255, 0.5);
+  --scrollbar-bg-active-dark: rgba(255, 255, 255, 0.6);
+  --scrollbar-bg: var(--scrollbar-bg-light);
+  --scrollbar-bg-hover: var(--scrollbar-bg-hover-light);
+  --scrollbar-bg-active: var(--scrollbar-bg-active-light);
+  --color-selection-bar: linear-gradient(
+    to right,
+    oklch(0.8 0.1 0),
+    oklch(0.8 0.1 30),
+    oklch(0.8 0.1 60),
+    oklch(0.8 0.1 90),
+    oklch(0.8 0.1 120),
+    oklch(0.8 0.1 150),
+    oklch(0.8 0.1 180),
+    oklch(0.8 0.1 210),
+    oklch(0.8 0.1 240),
+    oklch(0.8 0.1 270),
+    oklch(0.8 0.1 300),
+    oklch(0.8 0.1 330),
+    oklch(0.8 0.1 360)
+  );
+  --display-light-icon: 1;
+  --display-dark-icon: 0;
+}
+
+:root.dark {
+  --primary: oklch(0.75 0.14 var(--hue));
+  --page-bg: oklch(0.16 0.014 var(--hue));
+  --card-bg: oklch(0.23 0.015 var(--hue));
+  --btn-content: oklch(0.75 0.1 var(--hue));
+  --btn-regular-bg: oklch(0.33 0.035 var(--hue));
+  --btn-regular-bg-hover: oklch(0.38 0.04 var(--hue));
+  --btn-regular-bg-active: oklch(0.43 0.045 var(--hue));
+  --btn-plain-bg-hover: oklch(0.17 0.017 var(--hue));
+  --btn-plain-bg-active: oklch(0.19 0.017 var(--hue));
+  --btn-card-bg-hover: oklch(0.3 0.03 var(--hue));
+  --btn-card-bg-active: oklch(0.35 0.035 var(--hue));
+  --line-divider: rgba(255, 255, 255, 0.08);
+  --line-color: rgba(255, 255, 255, 0.1);
+  --meta-divider: rgba(255, 255, 255, 0.2);
+  --selection-bg: oklch(0.4 0.08 var(--hue));
+  --codeblock-bg: oklch(0.17 0.015 var(--hue));
+  --license-block-bg: var(--codeblock-bg);
+  --link-underline: oklch(0.4 0.08 var(--hue));
+  --link-hover: oklch(0.4 0.08 var(--hue));
+  --link-active: oklch(0.35 0.07 var(--hue));
+  --float-panel-bg: oklch(0.19 0.015 var(--hue));
+  --scrollbar-bg: var(--scrollbar-bg-dark);
+  --scrollbar-bg-hover: var(--scrollbar-bg-hover-dark);
+  --scrollbar-bg-active: var(--scrollbar-bg-active-dark);
+  --color-selection-bar: linear-gradient(
+    to right,
+    oklch(0.7 0.1 0),
+    oklch(0.7 0.1 30),
+    oklch(0.7 0.1 60),
+    oklch(0.7 0.1 90),
+    oklch(0.7 0.1 120),
+    oklch(0.7 0.1 150),
+    oklch(0.7 0.1 180),
+    oklch(0.7 0.1 210),
+    oklch(0.7 0.1 240),
+    oklch(0.7 0.1 270),
+    oklch(0.7 0.1 300),
+    oklch(0.7 0.1 330),
+    oklch(0.7 0.1 360)
+  );
+  --display-light-icon: 0;
+  --display-dark-icon: 1;
+}
+
+
+.prose {
+  --un-prose-body: #374151;
+  --un-prose-headings: #111827;
+  --un-prose-lead: #4b5563;
+  --un-prose-links: #111827;
+  --un-prose-bold: #111827;
+  --un-prose-counters: #6b7280;
+  --un-prose-bullets: #d1d5db;
+  --un-prose-hr: #e5e7eb;
+  --un-prose-quotes: #111827;
+  --un-prose-quote-borders: #e5e7eb;
+  --un-prose-captions: #6b7280;
+  --un-prose-kbd: #111827;
+  --un-prose-kbd-shadows: 17 24 39;
+  --un-prose-code: #111827;
+  --un-prose-pre-code: #e5e7eb;
+  --un-prose-pre-bg: #1f2937;
+  --un-prose-th-borders: #d1d5db;
+  --un-prose-td-borders: #e5e7eb;
+  --un-prose-invert-body: #d1d5db;
+  --un-prose-invert-headings: #fff;
+  --un-prose-invert-lead: #9ca3af;
+  --un-prose-invert-links: #fff;
+  --un-prose-invert-bold: #fff;
+  --un-prose-invert-counters: #9ca3af;
+  --un-prose-invert-bullets: #4b5563;
+  --un-prose-invert-hr: #374151;
+  --un-prose-invert-quotes: #f3f4f6;
+  --un-prose-invert-quote-borders: #374151;
+  --un-prose-invert-captions: #9ca3af;
+  --un-prose-invert-kbd: #fff;
+  --un-prose-invert-kbd-shadows: 255 255 255;
+  --un-prose-invert-code: #fff;
+  --un-prose-invert-pre-code: #d1d5db;
+  --un-prose-invert-pre-bg: rgb(0 0 0 / 50%);
+  --un-prose-invert-th-borders: #4b5563;
+  --un-prose-invert-td-borders: #374151;
+  font-size: 1rem;
+  line-height: 1.75
+}
+
+/* some global styles */
+::selection {
+  background-color: var(--selection-bg);
+}
+.scrollbar-base.os-scrollbar {
+  transition: width 0.15s ease-in-out, height 0.15s ease-in-out, opacity 0.15s,
+    visibility 0.15s, top 0.15s, right 0.15s, bottom 0.15s, left 0.15s;
+  pointer-events: unset;
+}
+.scrollbar-base.os-scrollbar.os-scrollbar-horizontal {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  height: 16px;
+}
+.scrollbar-base.os-scrollbar.os-scrollbar-horizontal
+  .os-scrollbar-track
+  .os-scrollbar-handle {
+  height: 4px;
+  border-radius: 4px;
+}
+.scrollbar-base.os-scrollbar.os-scrollbar-horizontal:hover
+  .os-scrollbar-track
+  .os-scrollbar-handle {
+  height: 8px;
+}
+.scrollbar-base.os-scrollbar.os-scrollbar-horizontal.px-2 {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.scrollbar-base.os-scrollbar.os-scrollbar-vertical {
+  padding-left: 4px;
+  padding-right: 4px;
+  width: 16px;
+}
+.scrollbar-base.os-scrollbar.os-scrollbar-vertical
+  .os-scrollbar-track
+  .os-scrollbar-handle {
+  width: 4px;
+  border-radius: 4px;
+}
+.scrollbar-base.os-scrollbar.os-scrollbar-vertical:hover
+  .os-scrollbar-track
+  .os-scrollbar-handle {
+  width: 8px;
+}
+.scrollbar-base.os-scrollbar.os-scrollbar-vertical.py-1 {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.scrollbar-auto.os-scrollbar {
+  --os-handle-bg: var(--scrollbar-bg);
+  --os-handle-bg-hover: var(--scrollbar-bg-hover);
+  --os-handle-bg-active: var(--scrollbar-bg-active);
+}
+.scrollbar-dark.os-scrollbar {
+  --os-handle-bg: var(--scrollbar-bg-dark);
+  --os-handle-bg-hover: var(--scrollbar-bg-hover-dark);
+  --os-handle-bg-active: var(--scrollbar-bg-active-dark);
+}
+.scrollbar-light.os-scrollbar {
+  --os-handle-bg: var(--scrollbar-bg-light);
+  --os-handle-bg-hover: var(--scrollbar-bg-hover-light);
+  --os-handle-bg-active: var(--scrollbar-bg-active-light);
+}
+
+/* layer components  */
+.card-base {
+  overflow: hidden;
+  border-radius: var(--radius-large);
+  background-color: var(--card-bg);
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+li,
+ul,
+ol,
+blockquote,
+code,
+pre,
+table,
+th,
+td,
+strong {
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+}
+
+.card-shadow {
+  --un-drop-shadow: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.005));
+  filter: var(--un-blur) var(--un-brightness) var(--un-contrast)
+    var(--un-grayscale) var(--un-hue-rotate) var(--un-invert) var(--un-saturate)
+    var(--un-sepia) var(--un-drop-shadow);
+}
+
+.\!link {
+  margin: -0.25rem;
+  border-radius: 0.375rem;
+  padding: 0.25rem;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+}
+
+.\!link:hover {
+  background-color: var(--link-hover);
+}
+
+.\!link:active {
+  background-color: var(--link-active);
+}
+
+.link {
+  margin: -0.25rem;
+  border-radius: 0.375rem;
+  padding: 0.25rem;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+}
+
+.link:hover {
+  background-color: var(--link-hover);
+}
+
+.link:active {
+  background-color: var(--link-active);
+}
+
+.link-lg {
+  margin: -0.375rem;
+  border-radius: 0.375rem;
+  padding: 0.375rem;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+}
+
+.link-lg:hover {
+  background-color: var(--link-hover);
+}
+
+.link-lg:active {
+  background-color: var(--link-active);
+}
+
+.float-panel {
+  top: 5.25rem;
+  overflow: hidden;
+  border-radius: var(--radius-large);
+  background-color: var(--float-panel-bg);
+  --un-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --un-shadow-colored: 0 20px 25px -5px var(--un-shadow-color),
+    0 8px 10px -6px var(--un-shadow-color);
+  box-shadow: var(--un-ring-offset-shadow, 0 0 #0000),
+    var(--un-ring-shadow, 0 0 #0000), var(--un-shadow);
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+}
+
+:is(.dark .float-panel) {
+  --un-shadow: 0 0 #0000;
+  --un-shadow-colored: 0 0 #0000;
+  box-shadow: var(--un-ring-offset-shadow, 0 0 #0000),
+    var(--un-ring-shadow, 0 0 #0000), var(--un-shadow);
+}
+
+.float-panel.closed {
+  pointer-events: none;
+  top: 4.75rem;
+  opacity: 0;
+}
+
+.search-panel mark {
+  background-color: transparent;
+  color: var(--primary);
+}
+
+.btn-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--card-bg);
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+}
+
+.btn-card:hover {
+  background-color: var(--btn-card-bg-hover);
+}
+
+.btn-card:active {
+  background-color: var(--btn-card-bg-active);
+}
+
+.btn-card.disabled {
+  pointer-events: none;
+  color: #0000001a;
+}
+
+:is(.dark .btn-card.disabled) {
+  color: #ffffff1a;
+}
+
+.btn-plain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: none;
+  color: #000000bf;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+}
+
+.btn-plain:hover {
+  background-color: var(--btn-plain-bg-hover);
+  color: var(--primary);
+}
+
+.btn-plain:active {
+  background-color: var(--btn-plain-bg-active);
+}
+
+:is(.dark .btn-plain) {
+  color: #ffffffbf;
+}
+
+:is(.dark .btn-plain:hover) {
+  color: var(--primary);
+}
+
+.btn-regular {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--btn-regular-bg);
+  color: var(--btn-content);
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+}
+
+.btn-regular:hover {
+  background-color: var(--btn-regular-bg-hover);
+}
+
+.btn-regular:active {
+  background-color: var(--btn-regular-bg-active);
+}
+
+:is(.dark .btn-regular) {
+  color: #ffffffbf;
+}
+
+.link-underline {
+  text-decoration-line: underline;
+  text-decoration-color: var(--link-underline);
+  text-decoration-style: dashed;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25rem;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
+}
+
+.link-underline:hover {
+  text-decoration-color: var(--link-hover);
+}
+
+.link-underline:active {
+  text-decoration-color: var(--link-active);
+}
+
+/* .text-90 {
+  color: #000000e6;
+}
+
+:is(.dark .text-90) {
+  color: #ffffffe6;
+}
+
+.text-75 {
+  color: #000000bf;
+}
+
+:is(.dark .text-75) {
+  color: #ffffffbf;
+}
+
+.text-50 {
+  color: #00000080;
+}
+
+:is(.dark .text-50) {
+  color: #ffffff80;
+}
+
+.text-30 {
+  color: #0000004d;
+}
+
+:is(.dark .text-30) {
+  color: #ffffff4d;
+}
+
+.text-25 {
+  color: #00000040;
+}
+
+:is(.dark .text-25) {
+  color: #ffffff40;
+} */
+
+html.is-changing .transition-fade {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.2s;
+}
+
+html.is-animating .transition-fade {
+  --un-translate-y: 1rem;
+  transform: translate(var(--un-translate-x), var(--un-translate-y))
+    rotate(var(--un-rotate)) skew(var(--un-skew-x)) skewY(var(--un-skew-y))
+    scaleX(var(--un-scale-x)) scaleY(var(--un-scale-y));
+  opacity: 0;
+}
+
+@keyframes fade-in-up {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.onload-animation {
+  opacity: 0;
+  animation: 0.3s fade-in-up;
+  animation-fill-mode: forwards;
+}
+
+#top-row {
+  animation-delay: 0ms;
+}
+
+#sidebar {
+  animation-delay: 0.1s;
+}
+
+#content-wrapper {
+  animation-delay: var(--content-delay);
+}
+
+#footer {
+  animation-delay: 0.4s;
+}
+
+/* 全局 markdown css */
+
+.custom-md h1 {
+  font-size: 1.875rem; /* 30px */
+  line-height: 2.25rem; /* 36px */
+}
+
+.custom-md h1 .anchor, .custom-md h2 .anchor, .custom-md h3 .anchor, .custom-md h4 .anchor, .custom-md h5 .anchor, .custom-md h6 .anchor {
+  margin: -0.125rem;
+  margin-left: 0.2ch;
+  padding: 0.125rem;
+  user-select: none;
+  opacity: 0;
+  text-decoration: none;
+  transition: opacity 0.15s ease-in-out, background 0.15s ease-in-out;
+}
+.custom-md h1 .anchor .anchor-icon, .custom-md h2 .anchor .anchor-icon, .custom-md h3 .anchor .anchor-icon, .custom-md h4 .anchor .anchor-icon, .custom-md h5 .anchor .anchor-icon, .custom-md h6 .anchor .anchor-icon {
+  margin-left: 0.45ch;
+  margin-right: 0.45ch;
+}
+.custom-md h1:hover .anchor, .custom-md h2:hover .anchor, .custom-md h3:hover .anchor, .custom-md h4:hover .anchor, .custom-md h5:hover .anchor, .custom-md h6:hover .anchor {
+  opacity: 1;
+}
+.custom-md a {
+  position: relative;
+  background: none;
+  margin: -0.25rem;
+  padding: 0.25rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration-line: underline;
+  text-decoration-color: var(--link-underline);
+  text-decoration-thickness: 0.125rem;
+  text-decoration-style: dashed;
+  text-underline-offset: 0.25rem;
+ /*&:after*/
+ /* content: ''*/
+ /* position: absolute*/
+ /* left: 2px*/
+ /* right: 2px*/
+ /* bottom: 4px*/
+ /* height: 6px*/
+ /* border-radius: 3px*/
+ /* background: var(--link-hover)*/
+ /* transition: background 0.15s ease-in-out;
+ */
+ /* z-index: -1;
+ */
+}
+.custom-md a:hover {
+  background: var(--link-hover);
+  text-decoration-color: var(--link-hover);
+}
+.custom-md a:active {
+  background: var(--link-active);
+  text-decoration-color: var(--link-active);
+}
+.custom-md code {
+  font-family: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  background: var(--inline-code-bg);
+  color: var(--inline-code-color);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  counter-reset: line;
+}
+.custom-md code:before {
+  content: none;
+}
+.custom-md code:after {
+  content: none;
+}
+.custom-md code span.line:before {
+  content: counter(line);
+  counter-increment: line;
+  direction: rtl;
+  display: inline-block;
+  margin-right: 1rem;
+  width: 1rem;
+  color: rgba(255,255,255,0.25);
+}
+.custom-md pre {
+  background: var(--codeblock-bg) !important;
+  border-radius: 0.75rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+.custom-md pre code {
+  /* color: unset; */
+  font-size: 0.875rem;
+  padding: 0;
+  background: none;
+}
+.custom-md pre code ::selection {
+  background: var(--codeblock-selection);
+}
+.custom-md pre code span.br::selection {
+  background: var(--codeblock-selection);
+}
+.custom-md ul li::marker {
+  color: var(--primary);
+}
+.custom-md ol li::marker {
+  color: var(--primary);
+}
+.custom-md blockquote {
+  font-style: normal;
+  font-weight: inherit;
+  border-left-color: rgba(0,0,0,0);
+  position: relative;
+}
+.custom-md blockquote:before {
+  content: '';
+  position: absolute;
+  left: -0.25rem;
+  display: block;
+  transition: background 0.15s ease-in-out;
+  background: var(--btn-regular-bg);
+  height: 100%;
+  width: 0.25rem;
+  border-radius: 1rem;
+}
+.custom-md blockquote p:before {
+  content: none;
+}
+.custom-md blockquote p:after {
+  content: none;
+}
+.custom-md img {
+  border-radius: 0.75rem;
+}
+.custom-md hr {
+  border-color: var(--line-divider);
+  border-style: dashed;
+}
+.custom-md iframe {
+  border-radius: 0.75rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+}
+
+
+.meta-icon {
+  margin-right: .5rem;
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: .375rem;
+  background-color: var(--btn-regular-bg);
+  color: var(--btn-content);
+  transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;
+  transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;
+  transition-property: color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(.4,0,.2,1);
+  transition-duration: .15s;
+}
+
+
+.collapsed {
+  height: 12rem;
+}

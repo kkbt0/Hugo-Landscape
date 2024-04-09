@@ -1,0 +1,46 @@
+{{ define "main" }}
+
+<!-- <h1>{{ .Title }}</h1>
+{{ .Content }} -->
+
+<div class="card-base px-8 py-6">
+  <div>
+    <!-- 年份 -->
+    <div class="flex flex-row w-full items-center h-[3.75rem]">
+      <div class="w-[15%] md:w-[10%] transition text-2xl font-bold text-right text-75">Hi</div>
+      <div class="w-[15%] md:w-[10%]">
+        <div
+          class="h-3 w-3 bg-none rounded-full outline outline-[var(--primary)] mx-auto -outline-offset-[2px] z-50 outline-3">
+        </div>
+      </div>
+      <div class="w-[70%] md:w-[80%] transition text-left text-50">{{ len .Pages }}</div>
+    </div>
+    <!-- 文章列表 -->
+    {{ range .Pages }}
+    <a href="{{ .RelPermalink }}" aria-label="{{ .LinkTitle }}"
+      class="group btn-plain block h-10 w-full rounded-lg hover:text-[initial]">
+      <div class="flex flex-row justify-start items-center h-full">
+        <!-- date -->
+        <div class="w-[15%] md:w-[10%] transition text-sm text-right text-50">
+          <!-- TODO 占位 -->
+        </div>
+        <!-- dot and line -->
+        <div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center">
+          <div class="un-list-line"></div>
+        </div>
+        <!-- post title -->
+        <div class="w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold
+                 group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
+                 text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden">
+                 {{ .LinkTitle }}
+        </div>
+        <!-- tag list -->
+        <div class="hidden md:block md:w-[15%] text-left text-sm transition
+             whitespace-nowrap overflow-ellipsis overflow-hidden
+             text-30">{{- $.Site.Params.dateFormat | default "01-02" | .Date.Format -}}</div>
+      </div>
+    </a>
+ {{ end }}
+  </div>
+</div>
+{{ end }}

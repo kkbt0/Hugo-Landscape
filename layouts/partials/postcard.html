@@ -1,0 +1,64 @@
+<div class="card-base un-postcard onload-animation">
+    {{- $haveCover := false -}}
+    {{- if .Params.featuredImage -}}{{- $haveCover = true -}}{{- end -}}
+    {{- if $haveCover -}}
+    <div class="un-postcard-in md:w-[calc(100%_-_var(--coverWidth)_-_12px)]">
+        {{- else -}}
+    <div class="un-postcard-in md:w-[calc(95%_-_52px_-_12px)]">
+            {{- end -}}
+            <a href="{{ .RelPermalink}}" class="un-postcard-title text-90">
+                {{ .Title }}
+                <span class="i-mdi-keyboard-arrow-right text-2xl"></span>
+            </a>
+            {{ if ne .Summary "" }}
+            <!-- Hugo 默认截取 不会走这条 if -->
+            <div class="mb-6">
+                {{ partial "meta.html" . }}
+            </div>
+            {{ else }}
+            <div class="mb-8">
+                {{ partial "meta.html" . }}
+            </div>
+            {{ end }}
+            <div class="transition text-75 mb-3.5 flex">
+                {{ .Summary | truncate 100 "..." }}
+            </div>
+
+        </div>
+        <!-- TODO have cover -->
+        {{- if $haveCover -}}
+        <a href="{{ .RelPermalink }}" aria-label="{{ .Title }}"
+            class="group max-h-[20vh] md:max-h-none mx-4 mt-4 -mb-2 md:mb-0 md:mx-0 md:mt-0
+                        md:w-[var(--coverWidth)] relative md:absolute md:top-3 md:bottom-3 md:right-3 rounded-xl overflow-hidden active:scale-95">
+            <div
+                class="absolute pointer-events-none z-10 w-full h-full group-hover:bg-black/30 group-active:bg-black/50 transition">
+            </div>
+            <div class="absolute pointer-events-none z-20 w-full h-full flex items-center justify-center ">
+                <div class="transition opacity-0 group-hover:opacity-100 text-white text-5xl">
+                    <div class="i-mdi-keyboard-arrow-right"></div>
+                </div>
+            </div>
+            <!-- <ImageWrapper src={image} basePath={path.join("content/posts/", getDir(entry.id))} alt="Cover Image of the Post"
+        class="w-full h-full">
+        </ImageWrapper> -->
+            <div class="w-full h-full overflow-hidden relative">
+                <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
+                <img src="{{ .Params.featuredImagePreview }}" alt="Cover Image of the Post"
+                    class="w-full h-full object-center object-cover" />
+            </div>
+        </a>
+        {{- else -}}
+        <a href="{{ .RelPermalink }}" aria-label="{{ .Title }}" class="hidden md:flex btn-regular w-[3.25rem]
+    absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
+    hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95
+   ">
+            <div class="transition text-[var(--primary)] text-4xl mx-auto">
+                <div class="i-mdi-keyboard-arrow-right"></div>
+            </div>
+        </a>
+        {{- end -}}
+
+        <div
+            class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden">
+        </div>
+    </div>
