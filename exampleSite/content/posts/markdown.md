@@ -4,8 +4,8 @@ categories: ["分类1"]
 tags: ["tag1"]
 slug: "md"
 
-featuredImage: "https://picx.zhimg.com/70/v2-dc07a79b0ad6bd0c3163ffd78dc6bbb4_1440w.avis"
-featuredImagePreview: "https://picx.zhimg.com/70/v2-dc07a79b0ad6bd0c3163ffd78dc6bbb4_1440w.avis"
+featuredImage: "https://www.dmoe.cc/random.php"
+featuredImagePreview: "https://www.dmoe.cc/random.php"
 ---
 
 This is a markdown test 
@@ -39,7 +39,7 @@ This is a markdown test
 ## 2. 图片与链接
  
 图片:
-![Blog](https://picx.zhimg.com/70/v2-dc07a79b0ad6bd0c3163ffd78dc6bbb4_1440w.avis)
+![Blog](https://www.dmoe.cc/random.php)
 链接:
  
 [这是去往Blog官方博客的链接](http://Blog.Blog.com)
@@ -171,7 +171,7 @@ Pipe     | \$1
  
 **提示**, 如果想对图片的宽度和高度进行控制, 你也可以通过img标签, 如:
  
-<img src="https://picx.zhimg.com/70/v2-dc07a79b0ad6bd0c3163ffd78dc6bbb4_1440w.avis" width="50px" />
+<img src="https://www.dmoe.cc/random.php" width="50px" />
  
 ## 5.4 脚注
  
