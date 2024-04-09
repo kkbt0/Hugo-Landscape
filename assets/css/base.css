@@ -826,3 +826,22 @@ html.is-animating .transition-fade {
 .collapsed {
   height: 12rem;
 }
+
+/* banner */
+
+.enable-banner #banner-wrapper {
+  height: var(--banner-height)
+}
+
+.enable-banner #top-row {
+  height: calc(var(--banner-height) - 4.5rem)
+}
+
+#banner-wrapper {
+  top: 0;
+  opacity: 1;
+}
+.banner-closed #banner-wrapper {
+  top: -120px;
+  opacity: 0;
+}

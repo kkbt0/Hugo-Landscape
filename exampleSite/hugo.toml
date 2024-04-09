@@ -12,6 +12,7 @@ description = "浮生若梦，为欢几何"
 [params]
   title = "Hugo-Landscape"
   description = "我们的征途是星辰大海！"
+  banner = "https://www.dmoe.cc/random.php"
 
 [taxonomies]
 author = "authors"
