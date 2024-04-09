@@ -3,6 +3,7 @@ import { defineConfig } from "unocss";
 import { presetUno } from "unocss"; //  预定义配置
 import { presetIcons } from "unocss"; // CSS 图标
 import { presetAttributify, presetTypography } from "unocss"; // 版式预设
+import presetLegacyCompat from '@unocss/preset-legacy-compat' // 旧版兼容预设
 // import transformerDirectives from "@unocss/transformer-directives";
 
 export default defineConfig({
@@ -16,6 +17,9 @@ export default defineConfig({
           import("@iconify-json/mdi/icons.json").then((i) => i.default),
       },
     }),
+    presetLegacyCompat({
+      commaStyleColorFunction: true,
+    })
   ],
   shortcuts: {
     // shortcuts to multiple utilities
