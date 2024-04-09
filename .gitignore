@@ -1,2 +1,4 @@
 node_modules
 exampleSite/public/
+public/
+.hugo_build.lock
