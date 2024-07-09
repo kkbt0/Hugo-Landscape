@@ -3,6 +3,7 @@ baseURL = 'https://kkbt0.github.io/Hugo-Landscape/'
 languageCode = 'zh-CN'
 title = 'Hugo-Landscape'
 theme = "../.."
+enableRobotsTXT = true
 
 [params.author]
 name = "恐咖兵糖"
@@ -26,3 +27,8 @@ series = "series"
 [Permalinks]
   # posts = ":year/:month/:filename"
   posts = "/posts/:slug"
+
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
