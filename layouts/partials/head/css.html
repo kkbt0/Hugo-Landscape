@@ -1,27 +1,17 @@
-<!-- css reset -->
-{{- with resources.Get "css/tailwind.css" }}
-  {{- if eq hugo.Environment "development" }}
-    <link rel="stylesheet" href="{{ .RelPermalink }}">
-  {{- else }}
-    {{- with . | minify | fingerprint }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-    {{- end }}
-  {{- end }}
+{{- if eq hugo.Environment "development" }}
+  {{ $opts := dict "enableSourceMap" true "sourceMapIncludeSources" true }}
+  {{- $styles := resources.Get "css/main.scss" | toCSS $opts }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+{{- else }}
+  {{ $opts := dict "enableSourceMap" false "sourceMapIncludeSources" false }}
+  {{- $styles := resources.Get "css/main.scss" | toCSS $opts | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}"
+    crossorigin="anonymous">
 {{- end }}
 
-<!-- Color 和基础 class -->
-{{- with resources.Get "css/base.css" }}
-  {{- if eq hugo.Environment "development" }}
-    <link rel="stylesheet" href="{{ .RelPermalink }}">
-  {{- else }}
-    {{- with . | minify | fingerprint }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-    {{- end }}
-  {{- end }}
-{{- end }}
 
 <!-- Unocss 生成 -->
-{{- with resources.Get "style.css" }}
+{{- with resources.Get "css/uno.css" }}
   {{- if eq hugo.Environment "development" }}
     <link rel="stylesheet" href="{{ .RelPermalink }}">
   {{- else }}

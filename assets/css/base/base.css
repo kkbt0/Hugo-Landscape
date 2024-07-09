@@ -845,3 +845,10 @@ html.is-animating .transition-fade {
   top: -120px;
   opacity: 0;
 }
+
+
+// User CSS
+
+.medium-zoom-overlay, .medium-zoom-image--opened {
+  z-index: 999;
+}
