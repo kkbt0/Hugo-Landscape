@@ -2,3 +2,5 @@ node_modules
 exampleSite/public/
 public/
 .hugo_build.lock
+resources/_gen/assets/
+exampleSite/resources/_gen/assets/

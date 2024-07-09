@@ -4,8 +4,8 @@
   "description": "Hugo Theme Hugo-Landscape",
   "main": "index.js",
   "scripts": {
-    "dev": "unocss \"layouts/**/*.html\" -o ./assets/style.css --watch",
-    "build": "unocss \"layouts/**/*.html\" -o ./assets/style.css "
+    "dev": "unocss \"layouts/**/*.html\" -o ./assets/css/uno.css --watch",
+    "build": "unocss \"layouts/**/*.html\" -o ./assets/css/uno.css "
   },
   "keywords": [
     "Hugo",

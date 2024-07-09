@@ -1,5 +1,7 @@
 dev:
     hugo server -s exampleSite/ --disableFastRender
+e:
+    hugo server -s exampleSite/ -e notdevelopment --disableFastRender 
 build:
     hugo --minify -s exampleSite/
 css:
