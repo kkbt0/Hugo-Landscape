@@ -15,3 +15,8 @@
       <script src="{{ .RelPermalink }}"></script>
 {{- end }}
 
+{{- with resources.Get "js/Swup.init.js" }}
+      <script src="{{ .RelPermalink }}"></script>
+{{- end }}
+
+

@@ -51,5 +51,7 @@ I want to make the height transition parallel with the content transition instea
     const swup = new Swup({
       plugins: [new SwupPreloadPlugin()]
     });
+    document.readyState === "complete" ? init() : document.addEventListener("DOMContentLoaded", ()=>init()),
+    swup.hooks.on("page:view", ()=>init())
 </script>
 </html>
