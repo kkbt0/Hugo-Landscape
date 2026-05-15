@@ -14,7 +14,9 @@
         before:absolute before:left-[-16px] before:top-[5.5px]">Categories</div>
             <div id="categories" class="collapse-wrapper px-4 overflow-hidden {{ if $isCollapsed }}collapsed{{ end }}"
                 style="--collapsedHeight: 7.5rem;">
-                {{ range .Site.Taxonomies.categories }}
+                {{ $categories := .Site.Taxonomies.categories }}
+                {{ $sortedPosts := $categories.ByCount }}
+                {{range $sortedPosts }}
                 <a href="{{ .Page.RelPermalink }}" aria-label="View all posts in the {{ .Page.Title }} category">
                     <button class="
             w-full
@@ -66,7 +68,9 @@
             <div id="tags" class="collapse-wrapper px-4 overflow-hidden {{ if $isCollapsed }}collapsed{{ end }}"
                 style="--collapsedHeight: 7.5rem;">
                 <div class="flex gap-2 flex-wrap">
-                    {{ range .Site.Taxonomies.tags }}
+                    {{ $tags := .Site.Taxonomies.tags }}
+                    {{ $sortedPosts := $tags.ByCount }}
+                    {{range $sortedPosts }}
                     <a href="{{ .Page.RelPermalink }}" aria-label="View all posts with the {{ .Page.Title }} tag"
                         class="btn-regular h-8 text-sm px-3 rounded-lg">
                         {{ .Page.Title }}

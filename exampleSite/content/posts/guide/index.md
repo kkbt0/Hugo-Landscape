@@ -5,7 +5,7 @@ description: "How to use this blog template."
 slug: "guide"
 
 tags: ["Tag1"]
-category: ["Guides"]
+categories: ["Guides"]
 
 cover: "posts/guide/cover.jpeg"
 ---

@@ -1,5 +1,6 @@
 ---
 title: Markdown 基本语法示例
+categories: ["Guides"]
 math: true
 ---
 
