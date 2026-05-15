@@ -1,9 +1,9 @@
 {{- $src := .Destination | safeURL -}}
 {{- $alt := .PlainText | plainify -}}
 {{- $title := .Title | plainify | default $alt -}}
-<figure>
+<figure class="flex flex-col justify-center items-center">
     <img src="{{ $src }}" alt="{{ $alt }}" {{ with $title }}title="{{ . }}" {{ end }} loading="lazy" decoding="async" />
     {{- with $title -}}
-    <figcaption class="text-center text-muted-foreground">{{ . }}</figcaption>
+    <figcaption class="text-muted-foreground">{{ . }}</figcaption>
     {{- end -}}
 </figure>
