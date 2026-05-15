@@ -1,0 +1,59 @@
+<!-- z-50 make the panel higher than other float panels -->
+<div x-data="axd.theme()" class="relative z-50" role="menu" tabindex="-1" @mouseleave="isHovered = false">
+    <button aria-label="Light/Dark Mode" role="menuitem"
+        class="relative btn-plain scale-animation rounded-lg h-11 w-11 active:scale-90" id="scheme-switch"
+        @click="toggle()" @mouseenter="isHovered = true">
+        <div class="absolute" :class="{ 'opacity-0': $store.somnia.theme !== 'light' }">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"
+                class="text-[1.25rem] iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                <use href='{{"icons/main.svg#light"|relURL}}'></use>
+            </svg>
+        </div>
+        <div class="absolute" :class="{ 'opacity-0': $store.somnia.theme !== 'dark' }">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"
+                class="text-[1.25rem] iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                <use href='{{"icons/main.svg#dark"|relURL}}'></use>
+            </svg>
+        </div>
+        <div class="absolute" :class="{ 'opacity-0': $store.somnia.theme !== 'system' }">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"
+                class="text-[1.25rem] iconify iconify--material-symbols" width="1em" height="1em" viewBox="0 0 24 24">
+                <use href='{{"icons/main.svg#auto"|relURL}}'></use>
+            </svg>
+        </div>
+
+    </button>
+
+    <div id="light-dark-panel" class="hidden lg:block absolute transition float-panel-closed top-11 -right-2 pt-5"
+        :class="{'float-panel-closed': !isHovered}">
+        <div class="card-base float-panel p-2">
+            <button
+                class="flex transition whitespace-nowrap items-center !justify-start w-full btn-plain scale-animation rounded-lg h-9 px-3 font-medium active:scale-95 mb-0.5"
+                @click="setTheme('light')" :class="{'current-theme-btn': $store.somnia.theme === 'light'}">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"
+                    class="text-[1.25rem] mr-3 iconify iconify--material-symbols" width="1em" height="1em"
+                    viewBox="0 0 24 24">
+                    <use href='{{"icons/main.svg#light"|relURL}}'></use>
+                </svg>
+                Light</button>
+            <button
+                class="flex transition whitespace-nowrap items-center !justify-start w-full btn-plain scale-animation rounded-lg h-9 px-3 font-medium active:scale-95 mb-0.5"
+                @click="setTheme('dark')" :class="{'current-theme-btn': $store.somnia.theme === 'dark'}">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"
+                    class="text-[1.25rem] mr-3 iconify iconify--material-symbols" width="1em" height="1em"
+                    viewBox="0 0 24 24">
+                    <use href='{{"icons/main.svg#dark"|relURL}}'></use>
+                </svg>
+                Dark</button>
+            <button
+                class="flex transition whitespace-nowrap items-center !justify-start w-full btn-plain scale-animation rounded-lg h-9 px-3 font-medium active:scale-95"
+                @click="setTheme('system')" :class="{'current-theme-btn': $store.somnia.theme === 'system'}">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img"
+                    class="text-[1.25rem] mr-3 iconify iconify--material-symbols" width="1em" height="1em"
+                    viewBox="0 0 24 24">
+                    <use href='{{"icons/main.svg#auto"|relURL}}'></use>
+                </svg>
+                System</button>
+        </div>
+    </div>
+</div>

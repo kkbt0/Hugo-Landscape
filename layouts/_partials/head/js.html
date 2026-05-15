@@ -1,0 +1,67 @@
+{{ $variable := resources.Get "js/variable.js" }}
+{{ $main := resources.Get "js/main.js" }}
+{{ $components := resources.Get "js/components.js" }}
+{{ $custom := resources.Get "js/custom.js" }}
+
+{{ $alpinejs := resources.Get "js/alpinejs.min.js" }}
+{{ $mediumZoom := resources.Get "js/medium-zoom.min.js" }}
+{{ $swup := resources.Get "js/swup/Swup.umd.js" }}
+{{ $swupScroll := resources.Get "js/swup/scroll-plugin.js" }}
+
+{{/*  {{ $swupPreload := resources.Get "js/swup/preload-plugin.js" }}  */}}
+
+{{ if hugo.IsDevelopment }}
+<script defer src="{{ $variable.RelPermalink }}"></script>
+<script defer src="{{ $main.RelPermalink }}"></script>
+<script defer src="{{ $components.RelPermalink }}"></script>
+<script defer src="{{ $custom.RelPermalink }}"></script>
+
+<script defer src="{{ $alpinejs.RelPermalink }}"></script>
+<script defer src="{{ $mediumZoom.RelPermalink }}"></script>
+<script defer src="{{ $swup.RelPermalink }}"></script>
+<script defer src="{{ $swupScroll.RelPermalink }}"></script>
+{{/*  <script defer src="{{ $swupPreload.RelPermalink }}"></script>  */}}
+{{ else }}
+{{- $jsBundle := slice $variable $main $components $custom $alpinejs $mediumZoom $swup $swupScroll | resources.Concat "js/bundle.js" | minify | fingerprint -}}
+<script defer src="{{ $jsBundle.RelPermalink }}"></script>
+{{ end }}
+
+<script defer>
+    // tocComponent 依赖 scroll-plugin
+    document.addEventListener('DOMContentLoaded', () => {
+        somnia.PageInitCustom();
+        somnia.swupPageInitMediumZoom();
+        somnia.swupPageInitCustom();
+        const swup = new Swup({
+            containers: ["main", "#toc"],
+            animationSelector: '[class*="transition-swup-"]',
+            // native: true,
+            plugins: [
+                new SwupScrollPlugin(),
+            ]
+        });
+        // Alpine.start(); // Alpinejs 已经启动
+        swup.hooks.on('page:view', () => {
+            somnia.swupPageInitMediumZoom();
+            somnia.swupPageInitCustom();
+        });
+    })
+</script>
+
+
+{{- if and site.Params.enablePWA  hugo.IsProduction  -}}
+{{ $options := dict }}
+{{ $options = dict "targetPath" "sw.min.js" | merge $options }}
+{{ $options = dict "minify" true | merge $options }}
+{{ $js := resources.Get "js/sw.js" | js.Build $options }}
+{{ $_ := $js.RelPermalink }}
+<script defer>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.min.js?v={{ now.Format "2006-0102-1504" }}')
+        .then(reg => console.log('[Somnia] [SW] 注册成功 scope:', reg.scope))
+        .catch(err => console.error('[Somnia] [SW] 注册失败:', err));
+    });
+  }
+</script>
+{{- end -}}

@@ -1,0 +1,116 @@
+<div id="sidebar"
+    class="mb-4 row-start-2 row-end-3 col-span-2 lg:row-start-1 lg:row-end-2 lg:col-span-1 lg:max-w-[17.5rem] onload-animation w-full">
+    <div class="flex flex-col w-full gap-4 mb-4">
+        {{ partial "sidebar/profile.html" . }}
+    </div>
+    {{/* 分类 */}}
+    <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky">
+        {{ $count := len .Site.Taxonomies.categories }}
+        {{ $isCollapsed := ge $count 7 }}
+        <widget-layout data-id="categories" data-is-collapsed="{{ if $isCollapsed }}true{{ else }}false{{ end }}"
+            class="pb-4 card-base onload-animation" style="animation-delay: 150ms; --collapsedHeight: 7.5rem;">
+            <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
+        before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:left-[-16px] before:top-[5.5px]">Categories</div>
+            <div id="categories" class="collapse-wrapper px-4 overflow-hidden {{ if $isCollapsed }}collapsed{{ end }}"
+                style="--collapsedHeight: 7.5rem;">
+                {{ range .Site.Taxonomies.categories }}
+                <a href="{{ .Page.RelPermalink }}" aria-label="View all posts in the {{ .Page.Title }} category">
+                    <button class="
+            w-full
+            h-10
+            rounded-lg
+            bg-none
+            hover:bg-[var(--btn-plain-bg-hover)]
+            active:bg-[var(--btn-plain-bg-active)]
+            transition-all
+            pl-2
+            hover:pl-3
+            
+            text-neutral-700
+            hover:text-[var(--primary)]
+            dark:text-neutral-300
+            dark:hover:text-[var(--primary)]
+        ">
+                        <div class="flex items-center justify-between relative mr-2">
+                            <div class="overflow-hidden text-left whitespace-nowrap overflow-ellipsis  ">
+                                {{ .Page.Title }}
+                            </div>
+                            <div class="transition px-2 h-7 ml-4 min-w-[2rem] rounded-lg text-sm font-bold
+                    text-[var(--btn-content)] dark:text-[var(--deep-text)]
+                    bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)]
+                    flex items-center justify-center">{{ len .Pages }}</div>
+                    </button>
+                </a>
+                {{ end }}
+            </div>
+            <div class="expand-btn px-4 -mb-2 {{ if not $isCollapsed }}hidden{{ end }}">
+                <button class="btn-plain rounded-lg w-full h-9">
+                    <div class="text-[var(--primary)] flex items-center justify-center gap-2 -translate-x-2">
+                        <svg width="1em" height="1em" class="text-[1.75rem]" data-icon="material-symbols:more-horiz">
+                            <use href='{{"icons/main.svg#material-symbols:more-horiz"|relURL}}'></use>
+                        </svg>
+                        More
+                    </div>
+                </button>
+            </div>
+        </widget-layout>
+
+        {{ $count := len .Site.Taxonomies.tags }}
+        {{ $isCollapsed := ge $count 20 }}
+        <widget-layout data-id="tags" data-is-collapsed="{{ if $isCollapsed }}true{{ else }}false{{ end }}"
+            class="pb-4 card-base onload-animation" style="animation-delay: 200ms; --collapsedHeight: 7.5rem;">
+            <div class="font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative ml-8 mt-4 mb-2
+        before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:left-[-16px] before:top-[5.5px]">Tags</div>
+            <div id="tags" class="collapse-wrapper px-4 overflow-hidden {{ if $isCollapsed }}collapsed{{ end }}"
+                style="--collapsedHeight: 7.5rem;">
+                <div class="flex gap-2 flex-wrap">
+                    {{ range .Site.Taxonomies.tags }}
+                    <a href="{{ .Page.RelPermalink }}" aria-label="View all posts with the {{ .Page.Title }} tag"
+                        class="btn-regular h-8 text-sm px-3 rounded-lg">
+                        {{ .Page.Title }}
+                    </a>
+                    {{ end }}
+                </div>
+            </div>
+            <div class="expand-btn px-4 -mb-2 {{ if not $isCollapsed }}hidden{{ end }}">
+                <button class="btn-plain rounded-lg w-full h-9">
+                    <div class="text-[var(--primary)] flex items-center justify-center gap-2 -translate-x-2">
+                        <svg width="1em" height="1em" class="text-[1.75rem]" data-icon="material-symbols:more-horiz">
+                            <use href='{{"icons/main.svg#material-symbols:more-horiz"|relURL}}'></use>
+                        </svg>
+                        More
+                    </div>
+                </button>
+            </div>
+        </widget-layout>
+    </div>
+</div>
+<style>
+    #sidebar-sticky .collapsed {
+        height: var(--collapsedHeight);
+    }
+</style>
+<script>
+    class WidgetLayout extends HTMLElement {
+        constructor() {
+            super();
+
+            if (this.dataset.isCollapsed !== "true")
+                return;
+
+            const id = this.dataset.id;
+            const btn = this.querySelector('.expand-btn');
+            const wrapper = this.querySelector(`#${id}`)
+            btn?.addEventListener('click', () => {
+                wrapper.classList.remove('collapsed');
+                btn.classList.add('hidden');
+            })
+        }
+    }
+
+    if (!customElements.get("widget-layout")) {
+        customElements.define("widget-layout", WidgetLayout);
+    }
+</script>

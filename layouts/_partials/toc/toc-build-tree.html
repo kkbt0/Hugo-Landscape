@@ -1,0 +1,62 @@
+{{/*
+  入参:
+    .items    — 扁平列表
+    .index    — 起始位置
+    .minDepth — 当前层最小 depth
+  返回: dict "nodes" <节点列表> "nextIndex" <下一待处理位置>
+*/}}
+
+{{- $items    := .items    -}}
+{{- $index    := .index    -}}
+{{- $minDepth := .minDepth -}}
+{{- $total    := len $items -}}
+
+{{- $nodes     := slice -}}
+{{- $i         := $index -}}
+{{- $continued := true -}}
+
+{{- range $items -}}{{/* 仅借 range 驱动循环，实际用 $i 控制位置 */}}
+{{- if and $continued (lt $i $total) -}}
+
+  {{- $cur := index $items $i -}}
+
+  {{- if lt $cur.depth $minDepth -}}
+    {{/* 遇到更浅的节点，退出交给父级 */}}
+    {{- $continued = false -}}
+
+  {{- else if gt $cur.depth $minDepth -}}
+    {{/* 比当前层深，不该在这里处理，退出 */}}
+    {{- $continued = false -}}
+
+  {{- else -}}
+    {{/* 同级节点，消费它 */}}
+    {{- $i = add $i 1 -}}
+    {{- $children := slice -}}
+
+    {{/* 向前看：下一个是否更深？ */}}
+    {{- if lt $i $total -}}
+      {{- $next := index $items $i -}}
+      {{- if gt $next.depth $minDepth -}}
+        {{/* 递归处理子节点 */}}
+        {{- $sub      := partial "toc/toc-build-tree" (dict
+              "items"    $items
+              "index"    $i
+              "minDepth" (add $minDepth 1)
+        ) -}}
+        {{- $children  = $sub.nodes -}}
+        {{- $i         = $sub.nextIndex -}}  {{/* 关键：跳过子递归已消费的 */}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $nodes = $nodes | append (dict
+        "id"          $cur.id
+        "title"       $cur.title
+        "depth"       $cur.depth
+        "subheadings" $children
+    ) -}}
+  {{- end -}}
+
+{{- end -}}
+{{- end -}}
+
+{{- return (dict "nodes" $nodes "nextIndex" $i) -}}

@@ -1,0 +1,29 @@
+{
+  "updateDate": "2026-05-14T00:58:11.855Z",
+  "dependencies": {
+    "swup": {
+      "url": "https://unpkg.com/swup@4",
+      "remote": "/swup@4.9.0/dist/Swup.umd.js",
+      "local": "/swup@4.9.0/dist/Swup.umd.js",
+      "path": "Somnia/assets/js/swup/Swup.umd.js"
+    },
+    "swup/preload-plugin": {
+      "url": "https://unpkg.com/@swup/preload-plugin@3",
+      "remote": "/@swup/preload-plugin@3.2.11/dist/index.umd.js",
+      "local": "/@swup/preload-plugin@3.2.11/dist/index.umd.js",
+      "path": "Somnia/assets/js/swup/preload-plugin.js"
+    },
+    "swup/scroll-plugin": {
+      "url": "https://unpkg.com/@swup/scroll-plugin@4",
+      "remote": "/@swup/scroll-plugin@4.0.0/dist/index.umd.js",
+      "local": "/@swup/scroll-plugin@4.0.0/dist/index.umd.js",
+      "path": "Somnia/assets/js/swup/scroll-plugin.js"
+    },
+    "alpinejs": {
+      "url": "https://unpkg.com/alpinejs",
+      "remote": "/alpinejs@3.15.12/dist/cdn.min.js",
+      "local": "/alpinejs@3.15.12/dist/cdn.min.js",
+      "path": "Somnia/assets/js/alpinejs.min.js"
+    }
+  }
+}

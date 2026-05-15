@@ -1,0 +1,27 @@
+{{- /* 使用 Scratch 存储上一个标题级别 */ -}}
+{{- $prevHeading := .Page.Scratch.Get "prevHeading" -}}
+{{- $currentHeading := .Level -}}
+
+{{- /* 章节逻辑：
+      1. 当不是第一个标题时，关闭上一个章节
+      2. 打开新章节
+      3. 渲染当前标题
+      4. 将当前标题存入 Scratch，供下一次调用
+*/ -}}
+
+{{- /* 1. 如果不是第一个标题，就关闭上一个章节 */ -}}
+{{- if $prevHeading }}
+</section>
+{{- end }}
+
+{{- /* 2. 打开新章节，关键 id 必须与标题自身的锚点相同，确保滚动监听 */ -}}
+{{/*  <section id="heading-{{ .Anchor }}" data-level="{{ .Level }}" class="content-section">  */}}
+<section>
+
+{{- /* 3. 渲染标题本身 */ -}}
+<h{{ .Level }} id="{{ .Anchor }}">
+    {{ .Text }}
+</h{{ .Level }}>
+
+{{- /* 4. 更新 Scratch，记录当前标题级别 */ -}}
+{{- .Page.Scratch.Set "prevHeading" $currentHeading -}}

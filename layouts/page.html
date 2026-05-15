@@ -1,0 +1,22 @@
+{{ define "main" }}
+<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+  <div class="card-base z-10 px-9 py-6 relative w-full ">
+    <div data-pagefind-body class="prose dark:prose-invert prose-base !max-w-none custom-md mt-2">
+      {{ .Content }}
+      {{ if .Scratch.Get "prevHeading" }}
+      </section>
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{if .Params.fediverse}}
+<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32 mt-4">
+  <div class="card-base z-10 px-9 py-6 relative w-full ">
+    <div class="prose dark:prose-invert prose-base !max-w-none custom-md mt-2">
+      {{ partial "comment/comment.html" . }}
+    </div>
+  </div>
+</div>
+{{end}}
+{{ end }}

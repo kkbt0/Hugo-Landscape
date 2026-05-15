@@ -1,0 +1,4 @@
+<div x-init="somnia.libs.mermaid.run()" x-data="$watch('$store.somnia.isDark', (n, o) => somnia.libs.mermaid.run())" class="" style="overflow-x: auto;" data-language="mermaid">
+    <pre class="mermaid" style="background-color: unset;">{{- .Inner | safeHTML }}</pre>
+    <pre class="mermaid-dark" style="background-color: unset;">{{- .Inner | safeHTML }}</pre>
+</div>

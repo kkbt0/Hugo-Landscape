@@ -28,3 +28,11 @@ DoIt 15kb - 30kb posts
 Unocss 30kb - 50kb
 ```
 还可以 2024.04.09
+
+---
+
+Hugo 升级为 v0.158.0
+CSS 改为 Tailwindcss
+JS 改为 Swup.js + Alpine.js ，方便开发。
+
+2026.05.15

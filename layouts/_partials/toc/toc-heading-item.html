@@ -1,0 +1,32 @@
+{{- $index := .index -}}
+
+{{- $depth := .node.depth -}}
+{{- $slug := .node.id -}}
+{{- $text := .node.title -}}
+{{- $subs := .node.subheadings -}}
+
+
+<a href="#{{ $slug }}"
+  class="px-2 flex gap-2 relative transition w-full min-h-9 rounded-xl hover:bg-[var(--toc-btn-hover)] active:bg-[var(--toc-btn-active)] py-2">
+  <div class="transition w-5 h-5 shrink-0 rounded-lg text-xs flex items-center justify-center font-bold
+  {{ if eq $depth 2 }} bg-[var(--toc-badge-bg)] text-[var(--btn-content)] {{ end }}
+  {{ if eq $depth 3 }} ml-4 {{ end }}
+  {{ if eq $depth 4 }} ml-8 {{ end }}
+  ">
+  {{ if eq $depth 2 }}{{add 1 $index}}{{ end }}
+  {{ if eq $depth 3 }}<div class="transition w-2 h-2 rounded-[0.1875rem] bg-[var(--toc-badge-bg)]"></div>{{ end }}
+  {{ if eq $depth 4 }}<div class="transition w-1.5 h-1.5 rounded-sm bg-black/5 dark:bg-white/10"></div>{{ end }}
+  </div>
+  <div class="transition text-sm
+  {{ if eq $depth 2 }} text-50 {{ end }}
+  {{ if eq $depth 3 }} text-50 {{ end }}
+  {{ if eq $depth 4 }} text-30 {{ end }}">
+  {{ $text }}
+  </div>
+</a>
+
+{{- if $subs -}}
+{{- range $idx,$sub := $subs -}}
+{{- partial "toc/toc-heading-item.html" (dict "node" $sub "index" $idx) -}}
+{{- end -}}
+{{- end -}}

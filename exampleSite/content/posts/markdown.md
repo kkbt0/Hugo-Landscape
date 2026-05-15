@@ -4,8 +4,7 @@ categories: ["分类1"]
 tags: ["tag1"]
 slug: "md"
 
-featuredImage: "https://www.dmoe.cc/random.php"
-featuredImagePreview: "https://www.dmoe.cc/random.php"
+cover: "https://www.dmoe.cc/random.php"
 ---
 
 This is a markdown test 

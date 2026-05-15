@@ -1,0 +1,101 @@
+{{$paginator := . }}
+
+{{/* 分页列表 */}}
+{{/* 配置：当前页左右各显示几页 */}}
+{{ $adjacent := 2 }}
+
+{{/* 基础数据 */}}
+{{ $total := $paginator.TotalPages }}
+{{ $current := $paginator.PageNumber }}
+{{/* 只有0页时不显示分页 */}}
+{{ if gt $total 0 }}
+
+{{/* 计算可见范围 l ~ r */}}
+{{ $l := sub $current $adjacent }}
+{{ if lt $l 1 }}{{ $l = 1 }}{{ end }}
+{{ $r := add $current $adjacent }}
+{{ if gt $r $total }}{{ $r = $total }}{{ end }}
+
+{{/* 构建页码数组（数字或 "..."） */}}
+{{ $pages := slice }}
+
+{{/* --- 左侧首页与省略号 --- */}}
+{{ if gt $l 1 }}
+{{ $pages = $pages | append 1 }}
+{{ end }}
+{{ if eq $l 3 }}
+{{ $pages = $pages | append 2 }}
+{{ else if gt $l 3 }}
+{{ $pages = $pages | append "..." }}
+{{ end }}
+
+{{/* --- 中间可见页码 --- */}}
+{{ range $i := seq $l $r }}
+{{ $pages = $pages | append $i }}
+{{ end }}
+
+{{/* --- 右侧省略号与末页 --- */}}
+{{ if lt $r (sub $total 2) }}
+{{ $pages = $pages | append "..." }}
+{{ else if eq $r (sub $total 2) }}
+{{ $pages = $pages | append (sub $total 1) }}
+{{ end }}
+{{ if lt $r $total }}
+{{ $pages = $pages | append $total }}
+{{ end }}
+
+<div class="mx-auto onload-animation flex flex-row gap-3 justify-center">
+    {{if $paginator.HasPrev}}
+    <a href="{{ $paginator.Prev.URL }}" aria-label="Previous Page"
+        class="btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11">
+        <svg width="1em" height="1em" class="text-[1.75rem]" data-icon="material-symbols:chevron-left-rounded">
+            <use href='{{"icons/main.svg#material-symbols:chevron-left-rounded"|relURL}}'></use>
+        </svg>
+    </a>
+    {{else}}
+    <a href="" class="btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11 disabled">
+        <svg width="1em" height="1em" class="text-[1.75rem]" data-icon="material-symbols:chevron-left-rounded">
+            <use href='{{"icons/main.svg#material-symbols:chevron-left-rounded"|relURL}}'></use>
+        </svg>
+    </a>
+    {{end}}
+
+    {{/* 渲染分页导航 */}}
+    <div
+        class="bg-[var(--card-bg)] flex flex-row rounded-lg items-center text-neutral-700 dark:text-neutral-300 font-bold">
+        {{ range $page := $pages }}
+        {{ if eq $page "..." }}
+        <li class="disabled"><span>…</span></li>
+        {{ else }}
+        {{/* 从 Pager 列表中取出对应页码的 URL */}}
+        {{ $pager := index $paginator.Pagers (sub $page 1) }}
+        {{ if eq $page $current }}
+        <div class="h-11 w-11 rounded-lg bg-[var(--primary)] flex items-center justify-center
+                    font-bold text-white dark:text-black/70">{{ $page }}</div>
+        {{else}}
+        <a href="{{ $pager.URL }}" aria-label="Page {{ $page }}"
+            class="btn-card w-11 h-11 rounded-lg overflow-hidden active:scale-[0.85]">{{ $page }}</a>
+        {{end}}
+
+        {{ end }}
+        {{ end }}
+    </div>
+    {{ end }}
+
+    {{if $paginator.HasNext}}
+    <a href="{{ $paginator.Next.URL }}" aria-label="Next Page"
+        class="btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11">
+        <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[1.75rem]"
+            data-icon="material-symbols:chevron-right-rounded">
+            <use href='{{"icons/main.svg#material-symbols:chevron-right-rounded"|relURL}}'></use>
+        </svg>
+    </a>
+    {{else}}
+    <a href="" class="btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11 disabled">
+        <svg width="1em" height="1em" viewBox="0 0 24 24" class="text-[1.75rem]"
+            data-icon="material-symbols:chevron-right-rounded">
+            <use href='{{"icons/main.svg#material-symbols:chevron-right-rounded"|relURL}}'></use>
+        </svg>
+    </a>
+    {{end}}
+</div>

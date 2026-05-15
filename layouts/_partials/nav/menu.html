@@ -1,0 +1,56 @@
+<div x-data id="nav-menu-panel" @click.outside="if ($store.somnia.menuOpen) $store.somnia.menuOpen = false"
+x-show="$store.somnia.menuOpen"
+x-transition:enter-start="opacity-0 -translate-y-1"
+x-transition:leave-end="opacity-0 -translate-y-1"
+class="float-panel absolute transition-all fixed right-4 px-2 py-2 float-panel-closed"
+:class="{'float-panel-closed': !$store.somnia.menuOpen}">
+
+    <a href='{{ "" | relURL }}' class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        ">
+        <div
+            class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]">
+            Home</div>
+        <svg width="1em" height="1em" class="transition text-[1.25rem] text-[var(--primary)]"
+            data-icon="material-symbols:chevron-right-rounded">
+            <use href='{{"icons/main.svg#material-symbols:chevron-right-rounded"|relURL}}'></use>
+        </svg>
+    </a>
+
+    <a href='{{ "posts/" | relURL }}' class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        ">
+        <div
+            class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]">
+            Achieve</div>
+        <svg width="1em" height="1em" class="transition text-[1.25rem] text-[var(--primary)]"
+            data-icon="material-symbols:chevron-right-rounded">
+            <use href='{{"icons/main.svg#material-symbols:chevron-right-rounded"|relURL}}'></use>
+        </svg>
+    </a>
+
+    <a href='{{ "about/" | relURL }}' class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        ">
+        <div
+            class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]">
+            About</div>
+        <svg width="1em" height="1em" class="transition text-[1.25rem] text-[var(--primary)]"
+            data-icon="material-symbols:chevron-right-rounded">
+            <use href='{{"icons/main.svg#material-symbols:chevron-right-rounded"|relURL}}'></use>
+        </svg>
+    </a>
+
+    <a href="https://github.com/kkbt0/Hugo-Landscape" class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
+            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+        "
+        target="_blank">
+        <div
+            class="transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]">
+            Github</div>
+        <svg width="1em" height="1em" class="transition text-[0.75rem] text-black/25 dark:text-white/25 -translate-x-1"
+            data-icon="fa6-solid:arrow-up-right-from-square">
+            <use href='{{"icons/main.svg#fa6-solid:arrow-up-right-from-square"|relURL}}'></use>
+        </svg>
+    </a>
+</div>

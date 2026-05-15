@@ -1,0 +1,86 @@
+<div x-data="nav()" id="navbar" class="z-50 onload-animation" @scroll.window="onScroll()">
+    <div class="absolute h-8 left-0 right-0 -top-8 bg-[var(--card-bg)] transition"></div>
+    <!-- used for onload animation -->
+    <div
+        class="card-base !overflow-visible max-w-[var(--page-width)] h-[4.5rem] !rounded-t-none mx-auto flex items-center justify-between px-4">
+        <a href='{{ "" | relURL }}'
+            class="btn-plain scale-animation rounded-lg h-[3.25rem] px-5 font-bold active:scale-95">
+            <div class="flex flex-row text-[var(--primary)] items-center text-md">
+
+                <svg width="1em" height="1em" class="text-[1.75rem] mb-1 mr-2"
+                    data-icon="material-symbols:home-outline-rounded">
+                    <use href='{{"icons/main.svg#material-symbols:home-outline-rounded"|relURL}}'></use>
+                </svg>
+                {{ .Site.Title }}
+
+            </div>
+        </a>
+
+        <div class="hidden md:flex">
+            <a aria-label="Home" href='{{ "" | relURL }}'
+                class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95">
+                <div class="flex items-center">Home</div>
+            </a>
+            <a aria-label="Achieve" href='{{ "posts/" | relURL }}'
+                class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95">
+                <div class="flex items-center">Achieve</div>
+            </a>
+            <a aria-label="About" href='{{ "about/" | relURL }}'
+                class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95">
+                <div class="flex items-center">About</div>
+            </a>
+            <a aria-label="GitHub" href="https://github.com/kkbt0/Hugo-Landscape" target="_blank"
+                class="btn-plain scale-animation rounded-lg h-11 font-bold px-5 active:scale-95">
+                <div class="flex items-center">GitHub
+                    <svg width="1em" height="1em" viewBox="0 0 512 512"
+                        class="text-[0.875rem] transition -translate-y-[1px] ml-1 text-black/[0.2] dark:text-white/[0.2]"
+                        data-icon="fa6-solid:arrow-up-right-from-square">
+                        <use href='{{"icons/main.svg#fa6-solid:arrow-up-right-from-square"|relURL}}'></use>
+                    </svg>
+                </div>
+            </a>
+        </div>
+
+        <div class="flex">
+            <!--<SearchPanel client:load>-->
+            <!-- Search -->
+            {{ partial "nav/search.html" . }}
+            <!-- Theme -->
+            {{ partial "nav/theme.html" . }}
+            <button x-data @click="$store.somnia.menuOpen = !$store.somnia.menuOpen" aria-label="Menu" name="Nav Menu"
+                class="btn-plain scale-animation rounded-lg w-11 h-11 active:scale-90 md:!hidden" id="nav-menu-switch">
+                <svg width="1em" height="1em" class="text-[1.25rem]" data-icon="material-symbols:menu-rounded">
+                    <symbol id="material-symbols:menu-rounded" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M4 18q-.425 0-.712-.288T3 17t.288-.712T4 16h16q.425 0 .713.288T21 17t-.288.713T20 18zm0-5q-.425 0-.712-.288T3 12t.288-.712T4 11h16q.425 0 .713.288T21 12t-.288.713T20 13zm0-5q-.425 0-.712-.288T3 7t.288-.712T4 6h16q.425 0 .713.288T21 7t-.288.713T20 8z">
+                        </path>
+                    </symbol>
+                    <use href="#material-symbols:menu-rounded"></use>
+                </svg>
+            </button>
+        </div>
+        <!-- NavMenuPanel -->
+        {{ partial "nav/menu.html" . }}
+
+    </div>
+</div>
+<script>
+    function nav() {
+        return {
+            onScroll() {
+                const NAVBAR_HEIGHT = 72
+                const MAIN_PANEL_EXCESS_HEIGHT = MAIN_PANEL_OVERLAPS_BANNER_HEIGHT * 16			// The height the main panel overlaps the banner
+                let bannerHeight = BANNER_HEIGHT
+                if (document.body.classList.contains('lg:is-home') && window.innerWidth >= 1024) {
+                    bannerHeight = BANNER_HEIGHT_HOME
+                }
+                let threshold = window.innerHeight * (bannerHeight / 100) - NAVBAR_HEIGHT - MAIN_PANEL_EXCESS_HEIGHT - 16
+                if (document.body.scrollTop >= threshold || document.documentElement.scrollTop >= threshold) {
+                    document.getElementById('navbar-wrapper').classList.add('navbar-hidden')
+                } else {
+                    document.getElementById('navbar-wrapper').classList.remove('navbar-hidden')
+                }
+            }
+        }
+    }
+</script>

@@ -1,0 +1,76 @@
+<!-- Attributes Inner Options  Ordinal Page PageInner Position Type-->
+<!-- Attributes {{ .Attributes }}<br>
+Inner {{ .Inner }}<br>
+Options {{ .Options }}<br>
+Ordinal {{ .Ordinal }}<br>
+Page {{ .Page }}<br>
+PageInner {{ .PageInner }}<br>
+Position {{ .Position }}<br>
+Type {{ .Type }}<br> -->
+{{/* ── 1. 构建 add_lines 行号集合 ── */}}
+{{- $addLines := .Attributes.add_lines -}}
+{{- $addSet := slice -}}
+{{- if $addLines -}}
+  {{- range $addLines -}}
+    {{- $start := index . 0 -}}
+    {{- $end   := index . 1 -}}
+    {{- range seq $start $end -}}
+      {{- $addSet = $addSet | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $delLines := .Attributes.del_lines -}}
+{{- $delSet := slice -}}
+{{- if $delLines -}}
+  {{- range $delLines -}}
+    {{- $start := index . 0 -}}
+    {{- $end   := index . 1 -}}
+    {{- range seq $start $end -}}
+      {{- $delSet = $delSet | append . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{/* ── 2. Chroma 高亮，拿到 Inner（行级 HTML） ── */}}
+{{- $result := transform.HighlightCodeBlock . -}}
+
+{{/* ── 3. 按行处理，命中行注入 add class ── */}}
+{{/* Inner 每行结构: <span class="line">...</span>\n */}}
+{{- $lines := split $result.Inner "\n" -}}
+{{- $lineNum := -1 -}}
+{{- $rendered := slice -}}
+{{- range $lines -}}
+  {{/* 跳过末尾空行 */}}
+  {{- if . -}}
+    {{- $lineNum = add $lineNum 1 -}}
+    {{- if in $addSet $lineNum -}}
+      {{/* 将 class="line" 替换为 class="line add" */}}
+      {{- $rendered = $rendered | append (replace . `class="line"` `class="line add"`) -}}
+    {{- else if in $delSet $lineNum -}}
+      {{/* 将 class="line" 替换为 class="line del" */}}
+      {{- $rendered = $rendered | append (replace . `class="line"` `class="line del"`) -}}
+    {{- else -}}
+      {{- $rendered = $rendered | append . -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $rendered = $rendered | append . -}}
+  {{- end -}}
+{{- end -}}
+
+
+{{/*  {{ $result := transform.HighlightCodeBlock . }}  */}}
+{{- $title := .Attributes.title | default .Type | default "text" -}}
+{{- $lineNos := cond (eq .Options.linenos false) "" "show-line-numbers" -}}
+{{- $lines := len (split .Inner "\n") -}}
+{{- $maxShownLines := .Page.Params.code.maxshownlines | default site.Params.page.code.maxshownlines | default 10 -}}
+
+{{- $open := false -}}
+{{- if eq .Attributes.open true -}}
+{{- $open = true -}}
+{{- end -}}
+
+<figure class="frame chroma">
+    <figcaption class="header"></figcaption>
+    <pre data-language="{{$title}}" class="wrap" style="--ecMaxLine:36ch"><code>{{ delimit $rendered "\n" | safeHTML }}</code></pre>
+</figure>

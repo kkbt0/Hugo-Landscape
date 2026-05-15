@@ -1,0 +1,70 @@
+<div class="flex flex-wrap text-neutral-500 dark:text-neutral-400 items-center gap-4 gap-x-4 gap-y-2 mb-4">
+  <!-- publish date -->
+  <div class="flex items-center">
+    <div class="meta-icon">
+      <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:calendar-today-outline-rounded">
+        <use href='{{"icons/main.svg#material-symbols:calendar-today-outline-rounded"|relURL}}'></use>
+      </svg>
+    </div>
+    <span class="text-50 text-sm font-medium">{{ .Date.Format "2006-01-02" }}</span>
+  </div>
+  <!-- update date -->
+  <div class="flex items-center">
+    <div class="meta-icon">
+      <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:edit-calendar-outline-rounded">
+        <use href='{{"icons/main.svg#material-symbols:edit-calendar-outline-rounded"|relURL}}'></use>
+      </svg>
+    </div>
+    <span class="text-50 text-sm font-medium">{{ .Lastmod.Format "2006-01-02" }}</span>
+  </div>
+  <!-- categories -->
+  {{ with .Params.categories }}
+  <div class="flex items-center">
+    <div class="meta-icon">
+      <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:book-2-outline-rounded">
+        <use href='{{"icons/main.svg#material-symbols:book-2-outline-rounded"|relURL}}'></use>
+      </svg>
+    </div>
+    <div class="flex flex-row flex-nowrap items-center">
+      {{ range $index, $categories := . }}
+      <a href='{{ "categories/" | relLangURL }}{{ $categories | urlize }}'
+        aria-label='View all posts in the {{ $categories }} category' }
+        class="link-lg transition text-50 text-sm font-medium hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"
+        data-pagefind-filter="categories">
+        {{ $categories }}
+      </a>
+      {{ if ne $index (sub (len $.Params.categories) 1) }}
+      <div class="mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+      {{ end }}
+
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+  <!-- tags -->
+  {{ with .Params.tags }}
+  <div class="items-center hidden md:flex">
+    <div class="meta-icon">
+      <svg width="1em" height="1em" class="text-xl" data-icon="material-symbols:tag-rounded">
+        <use href='{{"icons/main.svg#material-symbols:tag-rounded"|relURL}}'></use>
+      </svg>
+    </div>
+    <div class="flex flex-row flex-nowrap items-center">
+      {{ range $index, $tags := . }}
+      <a href='{{ "tags/" | relLangURL }}{{ $tags | urlize }}' aria-label='View all posts in the {{ $tags }} tag' }
+        class="link-lg transition text-50 text-sm font-medium hover:text-[var(--primary)] dark:hover:text-[var(--primary)] whitespace-nowrap"
+        data-pagefind-filter="tags">
+        {{ $tags }}
+      </a>
+      {{ if ne $index (sub (len $.Params.tags) 1) }}
+      <div class="mx-1.5 text-[var(--meta-divider)] text-sm">/</div>
+      {{ end }}
+
+      {{ end }}
+    </div>
+  </div>
+  {{ else }}
+  <!-- No tags 注意无图标 -->
+  <div class="transition text-50 text-sm font-medium hidden">No Tags</div>
+  {{ end }}
+</div>

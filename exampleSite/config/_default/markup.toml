@@ -1,0 +1,19 @@
+[goldmark.renderer]
+hardWraps = true # 允许 markdown 单换行
+# 允许原始 HTML（默认安全，会过滤危险标签）
+unsafe = true
+[highlight]
+# 代码高亮相关
+noClasses = false
+# 自动检测代码语言
+# 不开启未标注的代码块不会回退至纯文本 不会转为 span
+# https://gohugo.io/functions/transform/highlight/
+# https://gohugo.io/functions/transform/highlightcodeblock/
+guessSyntax = true
+
+# 数学公式 https://gohugo.io/content-management/mathematics/
+[goldmark.extensions.passthrough]
+enable = true
+[goldmark.extensions.passthrough.delimiters]
+block = [['\[', '\]'], ['$$', '$$']]
+inline = [['\(', '\)']]

@@ -1,0 +1,25 @@
+<div
+    class="relative transition overflow-hidden bg-[var(--license-block-bg)] py-5 px-6 mb-6 rounded-xl license-container onload-animation">
+    <div class="transition font-bold text-black/75 dark:text-white/75">{{ .Title }}</div>
+    <a href="{{.Permalink }}" class="link text-[var(--primary)]">{{.Permalink}}</a>
+    <div class="flex gap-6 mt-2">
+        <div>
+            <div class="transition text-black/30 dark:text-white/30 text-sm">Author</div>
+            <div class="transition text-black/75 dark:text-white/75 line-clamp-2">{{.Params.author|default
+                site.Params.author.name}}</div>
+        </div>
+        <div>
+            <div class="transition text-black/30 dark:text-white/30 text-sm">Published at</div>
+            <div class="transition text-black/75 dark:text-white/75 line-clamp-2">{{ .Date.Format "2006-01-02" }}</div>
+        </div>
+        <div>
+            <div class="transition text-black/30 dark:text-white/30 text-sm">License</div>
+            <div class="transition text-black/75 dark:text-white/75 line-clamp-2">{{ .Params.license | default "CC BY-NC-SA 4.0"}}</div>
+        </div>
+    </div>
+    <svg width="0.97em" height="1em"
+        class="transition text-[15rem] absolute pointer-events-none right-6 top-1/2 -translate-y-1/2 text-black/5 dark:text-white/5"
+        data-icon="fa6-brands:creative-commons">
+        <use href='{{"icons/main.svg#fa6-brands:creative-commons"|relURL}}'></use>
+    </svg>
+</div>

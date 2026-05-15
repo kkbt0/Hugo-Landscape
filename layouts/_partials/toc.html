@@ -1,0 +1,25 @@
+<div id="toc-wrapper" x-data="toc()" @scroll.window="onScroll()"
+    class="hidden lg:block transition absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)] items-center">
+    <div id="toc-inner-wrapper"
+        class="fixed top-14 w-[var(--toc-width)] h-[calc(100vh_-_20rem)] overflow-y-scroll overflow-x-hidden hide-scrollbar">
+        <div id="toc" class="w-full h-full transition-swup-fade ">
+            <div class="h-8 w-full"></div>
+            {{ partial "toc/toc.html" . }}
+            <div class="h-8 w-full"></div>
+        </div>
+    </div>
+</div>
+<script>
+    function toc() {
+        return {
+            onScroll() {
+                const bannerHeight = window.innerHeight * (BANNER_HEIGHT / 100)
+                if (document.body.scrollTop > bannerHeight || document.documentElement.scrollTop > bannerHeight) {
+                    this.$root.classList.remove('toc-hide')
+                } else {
+                    this.$root.classList.add('toc-hide')
+                }
+            }
+        }
+    }
+</script>

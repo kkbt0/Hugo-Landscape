@@ -1,10 +1,14 @@
 dev:
-    hugo server -s exampleSite/ --disableFastRender
-e:
-    hugo server -s exampleSite/ -e notdevelopment --disableFastRender 
+    ~/kkbt.work/bin/hugo server -s exampleSite/ --disableFastRender
 build:
     hugo --minify -s exampleSite/
 css:
-    pnpm run dev
+    npx tailwindcss -i ./assets/css/tailwind.in.css -o assets/css/tailwind.out.css --watch
 css-build:
-    pnpm run build
+    npx tailwindcss -i ./assets/css/tailwind.in.css -o assets/css/tailwind.out.css
+
+pf:
+    ~/kkbt.work/bin/pagefind_extended --site exampleSite/public
+
+update:
+    ~/kkbt.work/bin/llrt scripts/version.js 

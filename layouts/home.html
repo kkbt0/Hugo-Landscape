@@ -1,0 +1,14 @@
+{{ define "main" }}
+<div
+  class="transition flex flex-col rounded-[var(--radius-large)] bg-[var(--card-bg)] py-1 md:py-0 md:bg-transparent md:gap-4 mb-4">
+  {{ $allPosts := where .Site.RegularPages "Type" "posts" }}
+  {{ $limit := .Site.Params.limit.homePosts | default 7 }}
+  {{ $paginator := .Paginate $allPosts $limit }}
+
+  {{ range $index, $post := $paginator.Pages }}
+  {{ partial "postcard.html" (dict "Page" $post "index" $index) }}
+  {{ end }}
+
+  {{partial "paginator.html" $paginator}}
+</div>
+{{ end }}

@@ -1,26 +1,17 @@
 {
-  "name": "Hugo-Landscape",
-  "version": "0.1.0",
-  "description": "Hugo Theme Hugo-Landscape",
+  "name": "k10",
+  "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "unocss \"layouts/**/*.html\" -o ./assets/css/uno.css --watch",
-    "build": "unocss \"layouts/**/*.html\" -o ./assets/css/uno.css "
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "Hugo",
-    "Theme"
-  ],
-  "author": "恐咖兵糖",
-  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.33.0",
   "devDependencies": {
-    "@iconify-json/carbon": "^1.1.31",
-    "@iconify-json/mdi": "^1.1.66",
-    "@unocss/cli": "0.59.0-beta.1",
-    "@unocss/preset-legacy-compat": "^0.59.0",
-    "unocss": "0.59.0-beta.1"
-  },
-  "dependencies": {
-    "@unocss/reset": "^0.59.0"
+    "@tailwindcss/typography": "^0.5.19",
+    "tailwindcss": "^3.4.19"
   }
 }

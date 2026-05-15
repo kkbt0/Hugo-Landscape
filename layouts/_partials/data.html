@@ -1,0 +1,16 @@
+{{- $data := slice -}}
+
+{{- if .Params.math -}}
+{{- $data = $data | append  "katex" -}}
+{{- end -}}
+
+{{- if .Store.Get "mermaid" -}}
+{{- $data = $data | append  "mermaid" -}}
+{{- end -}}
+
+{{- if .IsHome -}}
+{{- $data = $data | append "home" -}}
+{{- end -}}
+
+<!-- 页面数据 -->
+<div x-data="somniaData()" data-somnia='{{ $data }}' style="display: none;"></div>

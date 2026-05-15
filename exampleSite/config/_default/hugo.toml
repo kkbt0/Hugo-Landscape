@@ -1,0 +1,26 @@
+# 用于输出 Markdown 格式文档的设置
+[mediaTypes]
+[mediaTypes."text/plain"]
+suffixes = ["md"]
+
+# 用于输出 Markdown 格式文档的设置
+[outputFormats.MarkDown]
+mediaType = "text/plain"
+isPlainText = true
+isHTML = false
+
+# 用于 Hugo 输出文档的设置
+[outputs]
+home = ["HTML", "RSS"]
+page = ["HTML", "MarkDown"]
+section = ["HTML", "RSS"]
+taxonomy = ["HTML", "RSS"]
+term = ['HTML']
+# taxonomyTerm = ["HTML"]
+
+# RSS 配置限制数量
+# https://gohugo.io/templates/rss/
+# 默认模板 https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/rss.xml
+[services]
+  [services.rss]
+    limit = 10

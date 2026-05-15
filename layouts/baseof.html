@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale }}" dir="{{ or site.Language.Direction `ltr` }}"
+  class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px] " style="--hue: 250;">
+
+<head>
+  {{ partial "head.html" . }}
+</head>
+
+<body
+  class="min-h-screen transition {{ if .IsHome }} lg:is-home {{ end }}{{ if .Site.Params.banner }} enable-banner {{ end }}">
+  <div id="config-carrier" data-hue="250"></div>
+  <!-- MainGridLayout -->
+  <!-- Navbar -->
+  <div id="top-row"
+    class="z-50 pointer-events-none relative transition-all duration-700 max-w-[var(--page-width)] px-0 md:px-4 mx-auto">
+    <div id="navbar-wrapper" class="pointer-events-auto sticky top-0 transition-all">
+      {{ partial "nav.html" . }}
+    </div>
+  </div>
+  <!-- Banner -->
+  {{ partial "banner.html" . }}
+  <!-- Main content -->
+  <!-- `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)` -->
+  <div class="absolute w-full z-30 pointer-events-none" {{if .Site.Params.banner}}
+    style="top: calc(var(--banner-height) - var(--main-panel-overlaps-banner-height))" {{else}} style="top: 5.5rem"
+    {{end}}>
+    <!-- The pointer-events-none here prevent blocking the click event of the TOC -->
+    <div class="relative max-w-[var(--page-width)] mx-auto pointer-events-auto">
+      <div id="main-grid" class="transition duration-700 w-full left-0 right-0 grid grid-cols-[17.5rem_auto] grid-rows-[auto_1fr_auto] lg:grid-rows-[auto]
+          mx-auto gap-4 px-0 md:px-4">
+        <!-- Banner image credit -->
+        <a href="https://www.pixiv.net/artworks/111024784" id="banner-credit" target="_blank" rel="noopener"
+          aria-label="Visit image source"
+          class="group onload-animation transition-all absolute flex justify-center items-center rounded-full px-3 right-4 -top-[3.25rem] bg-black/60 hover:bg-black/70 h-9 hover:pr-9 active:bg-black/80">
+          <svg width="1em" height="1em" class="text-white/75 text-[1.25rem] mr-1"
+            data-icon="material-symbols:copyright-outline-rounded">
+            <use href='{{"icons/main.svg#material-symbols:copyright-outline-rounded"|relURL}}'></use>
+          </svg>
+          <div class="text-white/75 text-xs">空色天絵 / NEO TOKYO NOIR 01</div>
+          <svg width="1em" height="1em"
+            class="transition absolute text-[oklch(0.75_0.14_var(--hue))] right-4 text-[0.75rem] opacity-0 group-hover:opacity-100"
+            data-icon="fa6-solid:arrow-up-right-from-square">
+            <use href='{{"icons/main.svg#fa6-solid:arrow-up-right-from-square"|relURL}}'></use>
+          </svg>
+        </a>
+        {{ partial "sidebar.html" . }}
+        <main id="swup-container" class="transition-swup-fade col-span-2 lg:col-span-1 overflow-hidden">
+          <div id="content-wrapper" class="onload-animation">
+            <!-- the overflow-hidden here prevent long text break the layout-->
+            <!-- make id different from windows.swup global property -->
+            {{ block "main" . }}{{ end }}
+            <div class="footer col-span-2 onload-animation hidden lg:block">
+              {{ partial "footer.html" . }}
+            </div>
+            {{ partial "data.html" . }}
+          </div>
+        </main>
+        <div class="footer col-span-2 onload-animation block lg:hidden">
+          {{ partial "footer.html" . }}
+        </div>
+      </div>
+      <!-- BackToTop -->
+      {{ partial "backtotop.html" . }}
+    </div>
+
+  </div>
+
+  <!-- The things that should be under the banner, only the TOC for now -->
+  <div class="absolute w-full z-0 hidden 2xl:block">
+    <div class="relative max-w-[var(--page-width)] mx-auto">
+      <!-- TOC component -->
+      {{ partial "toc.html" . }}
+      <!-- #toc needs to exist for Swup to work normally -->
+      <div id="toc"></div>
+    </div>
+  </div>
+
+  <!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
+  <div id="page-height-extend" class="hidden h-[300vh]"></div>
+</body>
+
+</html>

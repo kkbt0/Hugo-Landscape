@@ -1,0 +1,9 @@
+<div id="comments">
+{{if site.Params.comment.enable}}
+
+{{if eq site.Params.comment.provider "Mastodon"}}
+{{- partial "comment/mastodon.html" . }}
+{{end}}
+
+{{end}}
+</div>

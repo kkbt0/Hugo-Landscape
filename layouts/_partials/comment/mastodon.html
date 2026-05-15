@@ -1,0 +1,79 @@
+{{$url:=.Params.fediverse}}
+{{$id:=site.Params.comment.mastodon.id}}
+{{if $url}}
+<div x-data="axd.mastodonComment()" x-init="initMastodonCommentComponent('{{$url}}', '{{$id}}')"
+    class="relative flex flex-col gap-y-2 rounded-xl px-3 sm:px-4 py-2 sm:py-3 mt-3">
+    <div class="font-medium text-foreground">Fediverse 
+    </div>
+    <div x-text="info"></div>
+    {{/*  <a class="text-foreground" x-text="`${status.account.display_name}`" :href="status.account.url" target="_blank" rel="noopener noreferrer"></a>  */}}
+    <div x-html="sanitizeHTML(status.content)"></div>
+    <a class="flex gap-x-4 justify-end" :href="url" target="_blank" rel="noopener noreferrer" style="display: flex;">
+        <span class="mdi--reply"></span>
+        <span x-text="status.replies_count"></span>
+        <span class="mdi--star"></span>
+        <span x-text="status.favourites_count"></span>
+        <span class="mdi--twitter-retweet"></span>
+        <span x-text="status.reblogs_count"></span>
+    </a>
+    <div class="flex gap-x-4 justify-center flex-col">
+        <hr>
+        <template x-for="reply in replies">
+            <span class="gap-y-2 rounded-xl px-3 sm:px-4 py-2 sm:py-3 mt-3">
+                <a class="text-foreground" x-text="reply.account.display_name" :href="reply.account.url" target="_blank" rel="noopener noreferrer"></a>
+                <div x-html="sanitizeHTML(reply.content)"></div>
+            </span>
+        </template>
+    </div>
+</div>
+<style>
+    #comments a {
+        border-bottom: unset !important;
+    }
+    .mdi--reply {
+        display: inline-block;
+        width: 1.3em;
+        height: 1.3em;
+        --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M10 9V5l-7 7l7 7v-4.1c5 0 8.5 1.6 11 5.1c-1-5-4-10-11-11'/%3E%3C/svg%3E");
+        background-color: currentColor;
+        -webkit-mask-image: var(--svg);
+        mask-image: var(--svg);
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
+    }
+
+    .mdi--star {
+        display: inline-block;
+        width: 1.3em;
+        height: 1.3em;
+        --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2L9.19 8.62L2 9.24l5.45 4.73L5.82 21z'/%3E%3C/svg%3E");
+        background-color: currentColor;
+        -webkit-mask-image: var(--svg);
+        mask-image: var(--svg);
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
+    }
+
+    .mdi--twitter-retweet {
+        display: inline-block;
+        width: 1.3em;
+        height: 1.3em;
+        --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M6 5.75L10.25 10H7v6h6.5l2 2H7a2 2 0 0 1-2-2v-6H1.75zm12 12.5L13.75 14H17V8h-6.5l-2-2H17a2 2 0 0 1 2 2v6h3.25z'/%3E%3C/svg%3E");
+        background-color: currentColor;
+        -webkit-mask-image: var(--svg);
+        mask-image: var(--svg);
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
+    }
+</style>
+{{else}}
+{{/* <div class="relative flex flex-col gap-y-2 rounded-xl border px-3 sm:px-4 py-2 sm:py-3 mt-3">
+    <div class="font-medium text-foreground text-center">Fediverse Unready</div>
+</div> */}}
+{{end}}

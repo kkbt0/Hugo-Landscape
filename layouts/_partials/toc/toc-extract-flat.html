@@ -1,0 +1,17 @@
+{{/*
+  从 .Content 提取扁平 header 列表
+  入参: .Content (页面 HTML 内容)
+  返回: slice of dict{ id, title, depth }
+*/}}
+
+{{- $headers := findRE "<h[2-4][^>]*>(.|\n)*?</h[2-4]>" . -}}
+{{- $items   := slice -}}
+
+{{- range $headers -}}
+  {{- $depth := substr . 2 1 | int -}}
+  {{- $id    := replaceRE `<h[2-4][^>]*id="([^"]*)"[^>]*>(.|\n)*?</h[2-4]>` "$1" . -}}
+  {{- $title := replaceRE `<h[2-4].*?>(.*?)</h[2-4]>`                  "$1" . | plainify -}}
+  {{- $items  = $items | append (dict "id" $id "title" $title "depth" $depth) -}}
+{{- end -}}
+
+{{- return $items -}}

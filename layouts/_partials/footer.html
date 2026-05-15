@@ -1,0 +1,9 @@
+<div class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"></div>
+<div class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6">
+    <div class="transition text-50 text-sm text-center">
+        &copy; <span id="copyright-year">{{ now.Year }}</span> {{ .Site.Params.Author.name }}. All Rights Reserved. /
+        <a class="transition link text-[var(--primary)] font-medium" target="_blank" href='{{ "index.xml" | relURL }}'>RSS</a>
+        <br>
+        Powered by Hugo Theme <a href="https://github.com/kkbt0/Hugo-Landscape" class="transition link text-[var(--primary)] font-medium" target="_blank">Hugo-Landscape</a>
+    </div>
+</div>

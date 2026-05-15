@@ -1,0 +1,62 @@
+<div class="card-base flex flex-col-reverse md:flex-col w-full rounded-[var(--radius-large)] overflow-hidden relative onload-animation"
+    style="animation-delay: calc(var(--content-delay) + {{ mul 50 .index }}ms); --coverWidth: 28%;">
+    <div class="pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 relative 
+    {{if .Page.Params.cover}}
+    w-full md:w-[calc(100%_-_var(--coverWidth)_-_12px)] {{else}}
+    w-full md:w-[calc(100%_-_52px_-_12px)] {{end}}"
+        style="--coverWidth: 28%;">
+        <a href="{{ .Page.RelPermalink }}" class="transition group w-full block font-bold mb-3 text-3xl text-90
+        hover:text-[var(--primary)] dark:hover:text-[var(--primary)]
+        active:text-[var(--title-active)] dark:active:text-[var(--title-active)]
+        before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
+        before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block
+        ">{{ .Page.LinkTitle }}</a>
+        <!-- metadata -->
+        {{ partial "meta.html" .Page }}
+        <!-- description -->
+        <div class="transition text-75 mb-3.5 pr-4">
+            {{ .Page.Summary }}
+        </div>
+        <!-- word count and read time  -->
+        <div class="text-sm text-black/30 dark:text-white/30 flex gap-4 transition">
+            <div>{{.Page.WordCount }} words</div>
+            <div>|</div>
+            <div>{{.Page.ReadingTime}} min</div>
+        </div>
+    </div>
+
+    <!-- Cover image -->
+    {{if .Page.Params.cover}}
+    <a href="{{.Page.RelPermalink}}" aria-label="{{.Page.Title}}"
+        class="group max-h-[20vh] md:max-h-none mx-4 mt-4 -mb-2 md:mb-0 md:mx-0 md:mt-0 md:w-[var(--coverWidth)] relative md:absolute md:top-3 md:bottom-3 md:right-3 rounded-xl overflow-hidden active:scale-95">
+        <div
+            class="absolute pointer-events-none z-10 w-full h-full group-hover:bg-black/30 group-active:bg-black/50 transition">
+        </div>
+        <div class="absolute pointer-events-none z-20 w-full h-full flex items-center justify-center ">
+            <svg width="1em" height="1em" viewBox="0 0 24 24"
+                class="transition opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 text-white text-5xl"
+                data-icon="material-symbols:chevron-right-rounded">
+                <use href='{{"icons/main.svg#material-symbols:chevron-right-rounded"|relURL}}'></use>
+            </svg>
+        </div>
+        <!--ImageWrapper-->
+        <div class="w-full h-full overflow-hidden relative">
+            <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
+            <img src="{{ .Page.Params.cover }}" alt="Cover Image of the Post" style="object-position: center"
+                loading="lazy" decoding="async" class="w-full h-full object-cover">
+        </div>
+    </a>
+    {{else}}
+    <a href="{{.Page.RelPermalink}}" aria-label="{{.Page.Title}}" class="!hidden md:!flex btn-regular w-[3.25rem]
+         absolute right-3 top-3 bottom-3 rounded-xl bg-[var(--enter-btn-bg)]
+         hover:bg-[var(--enter-btn-bg-hover)] active:bg-[var(--enter-btn-bg-active)] active:scale-95">
+        <svg width="1em" height="1em" viewBox="0 0 24 24" class="transition text-[var(--primary)] text-4xl mx-auto"
+            data-icon="material-symbols:chevron-right-rounded">
+            <use href='{{"icons/main.svg#material-symbols:chevron-right-rounded"|relURL}}'></use>
+        </svg>
+    </a>
+    {{end}}
+</div>
+<div
+    class="transition border-t-[1px] border-dashed mx-6 border-black/10 dark:border-white/[0.15] last:border-t-0 md:hidden">
+</div>
