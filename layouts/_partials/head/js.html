@@ -3,6 +3,7 @@
 {{ $components := resources.Get "js/components.js" }}
 {{ $custom := resources.Get "js/custom.js" }}
 
+{{ $asyncAlpine := resources.Get "js/async-alpine.min.js" }}
 {{ $alpinejs := resources.Get "js/alpinejs.min.js" }}
 {{ $mediumZoom := resources.Get "js/medium-zoom.min.js" }}
 {{ $swup := resources.Get "js/swup/Swup.umd.js" }}
@@ -16,14 +17,28 @@
 <script defer src="{{ $components.RelPermalink }}"></script>
 <script defer src="{{ $custom.RelPermalink }}"></script>
 
+<script defer src="{{ $asyncAlpine.RelPermalink }}"></script>
 <script defer src="{{ $alpinejs.RelPermalink }}"></script>
 <script defer src="{{ $mediumZoom.RelPermalink }}"></script>
 <script defer src="{{ $swup.RelPermalink }}"></script>
 <script defer src="{{ $swupScroll.RelPermalink }}"></script>
 {{/*  <script defer src="{{ $swupPreload.RelPermalink }}"></script>  */}}
 {{ else }}
-{{- $jsBundle := slice $variable $main $components $custom $alpinejs $mediumZoom $swup $swupScroll | resources.Concat "js/bundle.js" | minify | fingerprint -}}
-<script defer src="{{ $jsBundle.RelPermalink }}" integrity="{{ $jsBundle.Data.Integrity }}" crossorigin="anonymous"></script>
+{{- $jsBundle := slice }}
+{{- $jsBundle = $jsBundle | append $variable }}
+{{- $jsBundle = $jsBundle | append $main }}
+{{- $jsBundle = $jsBundle | append $components }}
+{{- $jsBundle = $jsBundle | append $custom }}
+
+
+{{- $jsBundle = $jsBundle | append $asyncAlpine }}
+{{- $jsBundle = $jsBundle | append $alpinejs }}
+{{- $jsBundle = $jsBundle | append $mediumZoom }}
+{{- $jsBundle = $jsBundle | append $swup }}
+{{- $jsBundle = $jsBundle | append $swupScroll }}
+
+{{- $bundle := $jsBundle | resources.Concat "js/bundle.js" | minify | fingerprint -}}
+<script defer src="{{ $bundle.RelPermalink }}" integrity="{{ $bundle.Data.Integrity }}" crossorigin="anonymous"></script>
 {{ end }}
 
 <script defer>

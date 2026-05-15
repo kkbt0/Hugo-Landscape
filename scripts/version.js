@@ -57,7 +57,7 @@ async function updateVersion() {
     try {
         const ver = JSON.parse(readFileSync('./scripts/version.json', 'utf8'));
         // 定义需要处理的依赖项名称
-        const depNames = ['swup', 'swup/preload-plugin', 'swup/scroll-plugin', 'alpinejs'];
+        const depNames = ['swup', 'swup/preload-plugin', 'swup/scroll-plugin', 'alpinejs', 'async-alpine'];
 
         for (const depName of depNames) {
             const dep = ver.dependencies[depName];

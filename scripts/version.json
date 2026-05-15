@@ -1,5 +1,5 @@
 {
-  "updateDate": "2026-05-14T00:58:11.855Z",
+  "updateDate": "2026-05-15T11:47:36.019Z",
   "dependencies": {
     "swup": {
       "url": "https://unpkg.com/swup@4",
@@ -24,6 +24,12 @@
       "remote": "/alpinejs@3.15.12/dist/cdn.min.js",
       "local": "/alpinejs@3.15.12/dist/cdn.min.js",
       "path": "Somnia/assets/js/alpinejs.min.js"
+    },
+    "async-alpine": {
+      "url": "https://unpkg.com/async-alpine@2.x.x/dist/async-alpine.script.js",
+      "remote": "/async-alpine@2.0.3/dist/async-alpine.script.js",
+      "local": "/async-alpine@2.0.3/dist/async-alpine.script.js",
+      "path": "Somnia/assets/js/async-alpine.min.js"
     }
   }
 }

@@ -1,7 +1,12 @@
 {{$url:=.Params.fediverse}}
 {{$id:=site.Params.comment.mastodon.id}}
 {{if $url}}
-<div x-data="axd.mastodonComment()" x-init="initMastodonCommentComponent('{{$url}}', '{{$id}}')"
+<!-- async-alpine 异步加载评论系统 js-->
+<!-- https://async-alpine.dev/docs/ -->
+<div
+x-load="visible (100px)"
+x-load-src='{{"js/comment.mjs"|relURL}}'
+x-data="mastodonCommentComponent()" x-init="initMastodonCommentComponent('{{$url}}', '{{$id}}')"
     class="relative flex flex-col gap-y-2 rounded-xl px-3 sm:px-4 py-2 sm:py-3 mt-3">
     <div class="font-medium text-foreground">Fediverse 
     </div>
