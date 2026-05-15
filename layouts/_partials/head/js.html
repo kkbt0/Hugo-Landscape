@@ -23,7 +23,7 @@
 {{/*  <script defer src="{{ $swupPreload.RelPermalink }}"></script>  */}}
 {{ else }}
 {{- $jsBundle := slice $variable $main $components $custom $alpinejs $mediumZoom $swup $swupScroll | resources.Concat "js/bundle.js" | minify | fingerprint -}}
-<script defer src="{{ $jsBundle.RelPermalink }}"></script>
+<script defer src="{{ $jsBundle.RelPermalink }}" integrity="{{ $jsBundle.Data.Integrity }}" crossorigin="anonymous"></script>
 {{ end }}
 
 <script defer>
