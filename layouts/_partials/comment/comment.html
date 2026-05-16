@@ -5,5 +5,9 @@
 {{- partial "comment/mastodon.html" . }}
 {{end}}
 
+{{if eq site.Params.comment.provider "Artalk"}}
+{{- partial "comment/artalk.html" . }}
+{{end}}
+
 {{end}}
 </div>

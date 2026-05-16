@@ -1,0 +1,33 @@
+<!-- async-alpine 异步加载评论系统 js-->
+<!-- https://async-alpine.dev/docs/ -->
+<div x-load="visible (100px)" x-load-src='{{"js/comment.mjs"|relURL}}' x-data="artalkCommentComponent" class="mt-4">
+    <div id="artalk-comments"></div>
+</div>
+<!--
+// Artalk 示例
+// 创建 website/static/js/comment.mjs 并添加内容以覆盖 website/themes/Somnia/static/js/comment.mjs
+import Artalk from 'https://esm.sh/artalk@2.9.1'
+
+export function artalkCommentComponent() {
+    return {
+        artalk: null,
+        init() {
+            this.initArtalk();
+            this.$watch('$store.somnia.isDark', (n, o) => this.artalk.setDarkMode(n));
+        },
+        initArtalk() {
+            // 查找 head css 是否存在
+            document.head.querySelector('link[data-somnia="artalk.css"]') !== null ? null : Somnia.prototype.loadResource({ rel: 'stylesheet', href: "https://cdnjs.cloudflare.com/ajax/libs/artalk/2.9.1/Artalk.css", dataSomnia: 'artalk.css' });
+            this.artalk = new Artalk({
+                el: '#artalk-comments',     // 绑定DOM元素
+                server: 'http://127.0.0.1:23366',
+                site: 'ftls',
+                darkMode: this.$store.somnia.isDark,
+            });
+        },
+        destroy() {
+            this.artalk.destroy();
+        }
+    }
+}
+-->
