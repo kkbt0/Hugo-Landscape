@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prebuild": "node scripts/render-ec.js",
+    "prebuild": "node scripts/render-code.js",
     "build": "npm run prebuild && hugo --minify --source exampleSite",
     "start": "npm run prebuild && hugo server -s exampleSite"
   },
