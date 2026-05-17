@@ -14,6 +14,9 @@ importers:
       '@expressive-code/plugin-frames':
         specifier: ^0.42.0
         version: 0.42.0
+      '@fontsource/maple-mono':
+        specifier: ^5.2.6
+        version: 5.2.6
       '@shikijs/themes':
         specifier: ^1.29.2
         version: 1.29.2
@@ -27,6 +30,9 @@ importers:
         specifier: ^9.0.5
         version: 9.0.5
     devDependencies:
+      '@expressive-code/plugin-shiki':
+        specifier: ^0.42.0
+        version: 0.42.0
       '@tailwindcss/typography':
         specifier: ^0.5.19
         version: 0.5.19(tailwindcss@3.4.19)
@@ -58,6 +64,9 @@ packages:
 
   '@expressive-code/plugin-text-markers@0.42.0':
     resolution: {integrity: sha512-l59lUx8fq1v5g6SpmbDjiU0+7IdfbiWnAyRmtTVSpfhyq+nZMN4UcmYyu2b9Mynhzt7Gr+O+cXyEPDNb2AVWVQ==}
+
+  '@fontsource/maple-mono@5.2.6':
+    resolution: {integrity: sha512-+VAD7z8nyTkaiz2/Ww639Z5Kp/YJIL4dNMQxydqSMafNb5nKxFeoRq6W3g9WJ04IcBjdBmn0dKFNk90lyz7K+w==}
 
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
@@ -622,6 +631,8 @@ snapshots:
   '@expressive-code/plugin-text-markers@0.42.0':
     dependencies:
       '@expressive-code/core': 0.42.0
+
+  '@fontsource/maple-mono@5.2.6': {}
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:
