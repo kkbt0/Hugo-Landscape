@@ -7,31 +7,15 @@ import { glob } from 'glob';
 const ec = new ExpressiveCodeEngine({
     themes: ['github-light', 'github-dark'],
     themeCssSelector: (theme) => theme.name === 'github-dark' ? 'html.dark' : 'html:not(.dark)',
-    plugins: [pluginCollapsibleSections()],
-    styleOverrides: {
-        codeBackground: '#f6f8fa',
-        codeForeground: '#24292f',
-        uiSelectionBackground: '#c8e1ff',
-        uiSelectionForeground: '#ffffff',
-        editorActiveLineBackground: 'rgba(0,0,0,0.05)',
-        editorLineNumberForeground: '#8c959f',
-        editorLineNumberActiveForeground: '#24292f',
-        frames: {
-            borderColor: 'transparent',
-            shadowColor: 'rgba(0,0,0,0.1)',
-        },
-        collapsibleSections: {
-            closedArrowColor: '#666',
-            openArrowColor: '#666',
-        },
-        codeBlockPaddingInline: '1rem',
-        codeBlockPaddingBlock: '0.8rem',
-        codeFontFamily: "'SF Mono', 'Fira Code', monospace",
-        codeFontSize: '0.875rem',
-    },
+    plugins: [
+        collapsibleSections({
+            collapsedLabel: '…',
+            expandedLabel: '▼',
+        }),
+    ],
 });
 
-const contentDir = './exampleSite/content';
+const contentDir = './content';
 const mdFiles = glob.sync(`${contentDir}/**/*.md`, { ignore: '**/node_modules/**' });
 const blocksMap = {};
 
@@ -54,6 +38,8 @@ async function processFile(filePath) {
             language: match[1] || 'text',
             meta: match[2] || '',
             code: match[3],
+            start: match.index,
+            end: match.index + match[0].length,
         });
     }
     if (blocks.length === 0) return;

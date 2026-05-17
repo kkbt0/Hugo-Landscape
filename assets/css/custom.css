@@ -11,7 +11,7 @@ code, pre, .code-block-wrapper code, .ec-code-block code {
     tab-size: 2;
 }
 
-/* ========== 主题色面板样式 ========== */
+/* ========== 主题色面板（显示/隐藏） ========== */
 #display-setting {
     transition: opacity 0.2s ease, visibility 0.2s ease;
 }
@@ -33,13 +33,14 @@ code, pre, .code-block-wrapper code, .ec-code-block code {
     border-radius: 0.375rem;
 }
 
-/* ========== 降级代码块样式（非EC时使用） ========== */
+/* ========== 降级代码块包装器（非EC时使用） ========== */
 .code-block-wrapper {
     position: relative;
     margin: 1.5rem 0;
     background: oklch(0.18 0.02 var(--hue));
     border-radius: 0.5rem;
 }
+
 .code-block-wrapper[data-language]::before {
     position: absolute;
     top: 0.7rem;
@@ -59,6 +60,7 @@ code, pre, .code-block-wrapper code, .ec-code-block code {
     transition: opacity 0.2s ease;
     opacity: 0;
 }
+
 .code-block-wrapper .copy-btn {
     position: absolute;
     top: 0.7rem;
@@ -76,14 +78,17 @@ code, pre, .code-block-wrapper code, .ec-code-block code {
     transition: all 0.2s ease;
     opacity: 0;
 }
+
 .code-block-wrapper .copy-btn:hover {
     background: oklch(0.4 0.03 var(--hue));
 }
+
 .copy-btn svg {
     width: 1.25rem;
     height: 1.25rem;
     display: block;
 }
+
 @media (hover: hover) {
     .code-block-wrapper[data-language]::before,
     .code-block-wrapper .copy-btn {
@@ -94,6 +99,7 @@ code, pre, .code-block-wrapper code, .ec-code-block code {
         opacity: 0;
     }
 }
+
 @media (hover: none) {
     .code-block-wrapper[data-language]::before,
     .code-block-wrapper .copy-btn {
@@ -101,23 +107,26 @@ code, pre, .code-block-wrapper code, .ec-code-block code {
     }
 }
 
-/* ========== Expressive Code 亮/暗主题变量 ========== */
-:root {
-    --codeblock-bg: #f9fafb;
-}
-html.dark {
-    --codeblock-bg: #1e1e2e;
-}
+/* ========== EC 生成的代码块容器 ========== */
 .ec-code-block {
     margin: 1.5rem 0;
-}
-.expressive-code .frame {
-    background-color: var(--codeblock-bg);
+    background: oklch(0.18 0.02 var(--hue));
+    border-radius: 0.5rem;
 }
 
-/* ========== Mermaid 图表暗色适配 ========== */
-.dark .mermaid {
-    filter: invert(0.1);
+/* ========== 通用浮动面板 ========== */
+.float-panel {
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.float-panel.closed {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.float-panel:not(.closed) {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 /* ========== 表格边框 ========== */
@@ -142,4 +151,9 @@ html.dark th {
 html.dark .katex,
 html.dark .katex-html {
     color: #e5e5e5;
+}
+
+/* ========== 隐藏 Chroma 行号（避免与 EC 行号重复） ========== */
+.chroma .lntable {
+    display: none;
 }
