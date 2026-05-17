@@ -1,80 +1,98 @@
-import path from 'path';
-import { ExpressiveCode } from 'expressive-code';
-import { pluginShiki } from '@expressive-code/plugin-shiki';
-import { pluginFrames } from '@expressive-code/plugin-frames';
+// scripts/build-codeblocks.js
+import { unified } from 'unified';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import rehypeExpressiveCode from 'rehype-expressive-code';
 import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-sections';
+import { pluginFrames } from '@expressive-code/plugin-frames';
 import { toHtml } from 'hast-util-to-html';
+import { visit } from 'unist-util-visit';
 import fs from 'fs';
-import { glob } from 'glob';
+import { globSync } from 'glob';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const ec = new ExpressiveCode({
-  themeCssSelector: (theme) =>
-    theme.name === 'github-dark' ? 'html.dark' : 'html:not(.dark)',
-  plugins: [
-    pluginShiki({
-      themes: ['github-light', 'github-dark'],
-    }),
-    pluginFrames(),
-    pluginCollapsibleSections(),
-  ],
-});
+// 定位项目根
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const projectRoot = path.resolve(__dirname, '..');
 
-// 内容目录（相对于项目根）
-const contentDir = path.resolve('./exampleSite/content');
-const mdFiles = glob.sync(`${contentDir}/**/*.md`, { ignore: '**/node_modules/**' });
+// Expressive Code 配置
+const ecOptions = {
+  themes: ['github-light', 'github-dark'],
+  themeCssSelector: (theme) => theme.name === 'github-dark' ? 'html.dark' : 'html:not(.dark)',
+  plugins: [pluginCollapsibleSections(), pluginFrames()],
+};
+
+// unified 管道：remark -> rehype -> expressive-code
+const processor = unified()
+  .use(remarkParse)                       // 解析 Markdown → mdast
+  .use(remarkRehype, { allowDangerousHtml: true }) // mdast → hast
+  .use(rehypeExpressiveCode, ecOptions);   // 转换代码块
+
+const contentDir = path.join(projectRoot, 'exampleSite', 'content');
+const outputDir = path.join(projectRoot, 'exampleSite', 'data');
 const blocksMap = {};
 
 async function processFile(filePath) {
-  const content = fs.readFileSync(filePath, 'utf-8');
-  const codeBlockRegex = /```(\w*)(?:\s+(.*?))?\n([\s\S]*?)```/g;
-  let match;
+  const mdContent = fs.readFileSync(filePath, 'utf-8');
+
+  // 使用 parse + run 替代 process，避免缺少编译器错误
+  const mdast = processor.parse(mdContent);
+  const hast = await processor.run(mdast);
+
   const blocks = [];
 
-  while ((match = codeBlockRegex.exec(content)) !== null) {
-    blocks.push({
-      language: match[1] || 'text',
-      meta: match[2] || '',
-      code: match[3],
-    });
+  // 遍历 hast 树收集代码块
+  visit(hast, 'element', (node) => {
+    if (
+      node.tagName === 'div' &&
+      Array.isArray(node.properties?.className) &&
+      node.properties.className.includes('expressive-code')
+    ) {
+      blocks.push(toHtml(node));
+    }
+  });
+
+  // 如果遍历未找到，用正则兜底（以防结构变化）
+  if (blocks.length === 0) {
+    const fullHtml = toHtml(hast);
+    const regex = /<div class="expressive-code">[\s\S]*?<\/div>/g;
+    let match;
+    while ((match = regex.exec(fullHtml)) !== null) {
+      blocks.push(match[0]);
+    }
   }
 
   if (blocks.length === 0) return;
 
-  // 计算相对于 contentDir 的路径，并统一为正斜杠
-  const relativePath = path.relative(contentDir, path.resolve(filePath)).replace(/\\/g, '/');
-  // 现在 relativePath 例如："about.md" 或 "posts/图.md"
+  const relativePath = path.relative(contentDir, filePath).replace(/\\/g, '/');
 
   for (let idx = 0; idx < blocks.length; idx++) {
-    const block = blocks[idx];
     const blockKey = `${relativePath}_${idx}`;
-
-    try {
-      const rendered = await ec.render({
-        code: block.code,
-        language: block.language,
-        meta: block.meta,
-      });
-      const html = toHtml(rendered.renderedGroupAst);
-      const wrapped = `<div class="ec-code-block" data-language="${block.language}">${html}</div>`;
-      blocksMap[blockKey] = wrapped;
-    } catch (err) {
-      console.error(`渲染失败: ${filePath} 块 ${idx}`, err);
-      blocksMap[blockKey] = `<pre><code>${escapeHtml(block.code)}</code></pre>`;
-    }
+    blocksMap[blockKey] = `<div class="ec-code-block">${blocks[idx]}</div>`;
   }
 }
 
 async function main() {
+  const posixContentDir = contentDir.replace(/\\/g, '/');
+  const pattern = `${posixContentDir}/**/*.md`;
+
+  console.log(`项目根目录: ${projectRoot}`);
+  console.log(`内容目录: ${contentDir}`);
+  console.log(`扫描模式: ${pattern}`);
+
+  const mdFiles = globSync(pattern, { ignore: '**/node_modules/**' });
+  console.log(`找到 ${mdFiles.length} 个 Markdown 文件`);
+
   for (const file of mdFiles) {
     await processFile(file);
   }
 
-  // 输出到 exampleSite/data/（Hugo 站点根下的 data 目录）
-  const outDir = './exampleSite/data';
-  if (!fs.existsSync(outDir)) {
-    fs.mkdirSync(outDir, { recursive: true });
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
   }
-  fs.writeFileSync(`${outDir}/ec-blocks.json`, JSON.stringify(blocksMap, null, 2));
+  fs.writeFileSync(path.join(outputDir, 'ec-blocks.json'), JSON.stringify(blocksMap, null, 2));
   console.log(`✅ 已渲染 ${Object.keys(blocksMap).length} 个代码块`);
 }
 
