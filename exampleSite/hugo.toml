@@ -22,3 +22,12 @@ provider = "Mastodon"
   changefreq = "weekly"
   filename = "sitemap.xml"
   priority = 0.5
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    noClasses = false
+    style = "github"
+    lineNos = false

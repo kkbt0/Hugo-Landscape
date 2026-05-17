@@ -1,1 +1,145 @@
-/* Hugo 用户覆盖 css 文件占位 */
+/* ========== 全局色相变量 ========== */
+:root {
+    --hue: 250;
+    --code-font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+}
+
+/* ========== 代码字体 ========== */
+code, pre, .code-block-wrapper code, .ec-code-block code {
+    font-family: var(--code-font-family);
+    font-size: 0.875rem;
+    tab-size: 2;
+}
+
+/* ========== 主题色面板样式 ========== */
+#display-setting {
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+#display-setting.closed {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+#display-setting:not(.closed) {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+#display-setting .slider {
+    accent-color: oklch(0.6 0.2 var(--hue));
+}
+#reset-hue-btn:hover {
+    background: oklch(0.3 0.03 var(--hue));
+    border-radius: 0.375rem;
+}
+
+/* ========== 降级代码块样式（非EC时使用） ========== */
+.code-block-wrapper {
+    position: relative;
+    margin: 1.5rem 0;
+    background: oklch(0.18 0.02 var(--hue));
+    border-radius: 0.5rem;
+}
+.code-block-wrapper[data-language]::before {
+    position: absolute;
+    top: 0.7rem;
+    right: 3rem;
+    z-index: 2;
+    content: attr(data-language);
+    padding: 0.125rem 0.5rem;
+    font-family: monospace;
+    font-weight: 600;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: oklch(0.85 0.1 var(--hue));
+    background: oklch(0.3 0.02 var(--hue));
+    border-radius: 0.375rem;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    opacity: 0;
+}
+.code-block-wrapper .copy-btn {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    z-index: 3;
+    background: oklch(0.3 0.02 var(--hue));
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.25rem;
+    cursor: pointer;
+    color: oklch(0.85 0.1 var(--hue));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    opacity: 0;
+}
+.code-block-wrapper .copy-btn:hover {
+    background: oklch(0.4 0.03 var(--hue));
+}
+.copy-btn svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: block;
+}
+@media (hover: hover) {
+    .code-block-wrapper[data-language]::before,
+    .code-block-wrapper .copy-btn {
+        opacity: 1;
+    }
+    .code-block-wrapper:hover[data-language]::before,
+    .code-block-wrapper:hover .copy-btn {
+        opacity: 0;
+    }
+}
+@media (hover: none) {
+    .code-block-wrapper[data-language]::before,
+    .code-block-wrapper .copy-btn {
+        opacity: 1;
+    }
+}
+
+/* ========== Expressive Code 亮/暗主题变量 ========== */
+:root {
+    --codeblock-bg: #f9fafb;
+}
+html.dark {
+    --codeblock-bg: #1e1e2e;
+}
+.ec-code-block {
+    margin: 1.5rem 0;
+}
+.expressive-code .frame {
+    background-color: var(--codeblock-bg);
+}
+
+/* ========== Mermaid 图表暗色适配 ========== */
+.dark .mermaid {
+    filter: invert(0.1);
+}
+
+/* ========== 表格边框 ========== */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+}
+th, td {
+    border: 1px solid oklch(0.7 0.02 var(--hue));
+    padding: 0.5rem;
+    text-align: left;
+}
+th {
+    background: oklch(0.85 0.02 var(--hue));
+}
+html.dark th {
+    background: oklch(0.25 0.02 var(--hue));
+}
+
+/* ========== KaTeX 暗色模式 ========== */
+html.dark .katex,
+html.dark .katex-html {
+    color: #e5e5e5;
+}

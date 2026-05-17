@@ -48,6 +48,11 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+      - name: Build UnoCSS styles
+        run: pnpm build 
+      - name: Run Expressive Code pre‑render
+        run: |
+          npm run prebuild || echo "⚠️ prebuild failed, but continuing"
       - name: Build with Hugo
         env:
           # For maximum backward compatibility with Hugo modules

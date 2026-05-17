@@ -1,8 +1,8 @@
 # Hugo-Landscape
 
-Hugo Theme Hugo-Landscape https://github.com/kkbt0/Hugo-Landscape
+Hugo Theme Hugo-Landscape-Next <https://wolffyhtl.github.io/Hugo-Landscape-Next/>
 
-Demo https://kkbt0.github.io/Hugo-Landscape/
+Demo <https://wolffyhtl.github.io/Hugo-Landscape-Next/>
 
 ## Features
 
@@ -13,17 +13,17 @@ Use Unocss and Swup
 ```bash
 hugo new site blog
 cd blog
-git clone https://github.com/kkbt0/Hugo-Landscape themes/Hugo-Landscape
+git clone https://wolffyhtl.github.io/Hugo-Landscape-Next themes/Hugo-Landscape-Next
 ```
-Configure your own site based on exampleSite. 
+
+Configure your own site based on exampleSite.
 
 ## Develop
 
 ```bash
-git clone https://github.com/kkbt0/Hugo-Landscape
+git clone https://wolffyhtl.github.io/Hugo-Landscape-Next
 pnpm install
 just
 ```
 
 This project uses the [JUST](https://just.systems/) management command.
-

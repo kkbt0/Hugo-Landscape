@@ -1,0 +1,88 @@
+name: Deploy Hugo site to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches:
+      # If you want to build from a different branch, change it here.
+      - master
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    # You can find the list of available runners on https://codeberg.org/actions/meta, or run one yourself.
+    runs-on: codeberg-small-lazy
+    steps:
+      - name: Clone the repository
+        uses: https://code.forgejo.org/actions/checkout@v6
+        with:
+          submodules: recursive
+          fetch-depth: 0
+      - name: check .domains files
+        run: |
+          git ls-files static/.domains
+          ls -la static/
+          ls -la static/.domains || echo ".domains not found"
+      - name: Setup Hugo
+        uses: https://github.com/peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+      - name: Setup Node.js
+        uses: https://code.forgejo.org/actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: 'npm'
+      - name: Install Node.js dependencies
+        run: npm ci
+      - name: Build UnoCSS styles
+        run: pnpm build 
+      - name: Run Expressive Code pre‑render
+        run: |
+          npm run prebuild || echo "⚠️ prebuild failed, but continuing"
+      - name: Build with Hugo
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
+        run: |
+          hugo \
+            --minify \
+            --baseURL "${{ steps.pages.outputs.base_url }}/" \
+            -s exampleSite/
+      - name: Upload generated files
+        uses: https://code.forgejo.org/actions/upload-artifact@v3
+        with:
+          name: Generated files
+          path: ./exampleSite/public
+          include-hidden-files: true
+      
+  deploy:
+    needs: [ build ]
+    runs-on: codeberg-tiny-lazy
+    steps:
+      - name: Clone the repository
+        uses: https://code.forgejo.org/actions/checkout@v6
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Checkout the target branch and clean it up
+        run: |
+          git checkout pages || git switch --orphan pages
+          rm -Rfv $(ls -A | egrep -v '^(\.git|LICENSE)$')
+
+      - name: Download generated files
+        uses: https://code.forgejo.org/actions/download-artifact@v3
+        with:
+          name: Generated files
+
+      - name: Publish the website
+        run: |
+          git config user.email codeberg-ci
+          git config user.name "Codeberg CI"
+          echo "=== Files being committed ==="
+          ls -la
+          git add .
+          git commit --allow-empty --message "Codeberg build for ${GITHUB_SHA}"
+          git push origin pages

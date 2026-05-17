@@ -1,4 +1,18 @@
-<div x-init="somnia.libs.mermaid.run()" x-data="$watch('$store.somnia.isDark', (n, o) => somnia.libs.mermaid.run())" class="" style="overflow-x: auto;" data-language="mermaid">
-    <pre class="mermaid" style="background-color: unset;">{{- .Inner | safeHTML }}</pre>
-    <pre class="mermaid-dark" style="background-color: unset;">{{- .Inner | safeHTML }}</pre>
+<div class="mermaid-wrapper" data-language="mermaid">
+    <pre class="mermaid">{{- .Inner | safeHTML }}</pre>
+    <pre class="mermaid-dark">{{- .Inner | safeHTML }}</pre>
 </div>
+
+<script>
+    (function() {
+        if (typeof mermaid !== 'undefined') {
+            const isDark = document.documentElement.classList.contains('dark');
+            const showEl = document.querySelectorAll(isDark ? '.mermaid-dark' : '.mermaid');
+            const hideEl = document.querySelectorAll(isDark ? '.mermaid' : '.mermaid-dark');
+            showEl.forEach(e => e.style.display = 'block');
+            hideEl.forEach(e => e.style.display = 'none');
+            mermaid.initialize({ startOnLoad: false, theme: isDark ? 'dark' : 'default' });
+            mermaid.run({ querySelector: isDark ? ".mermaid-dark" : ".mermaid" });
+        }
+    })();
+</script>
