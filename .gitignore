@@ -4,4 +4,4 @@ public/
 .hugo_build.lock
 resources/_gen/assets/
 exampleSite/resources/_gen/assets/
-data/ec-blocks.json
+exampleSite/data/ec-blocks.json

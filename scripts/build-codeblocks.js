@@ -65,8 +65,9 @@ async function main() {
   for (const file of mdFiles) {
     await processFile(file);
   }
-  if (!fs.existsSync('./data')) fs.mkdirSync('./data');
-  fs.writeFileSync('./data/ec-blocks.json', JSON.stringify(blocksMap, null, 2));
+  const outDir = './exampleSite/data';
+  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+  fs.writeFileSync(`${outDir}/ec-blocks.json`, JSON.stringify(blocksMap, null, 2));
   console.log(`✅ 已渲染 ${Object.keys(blocksMap).length} 个代码块`);
 }
 
