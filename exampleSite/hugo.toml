@@ -29,5 +29,6 @@ provider = "Mastodon"
       unsafe = true
   [markup.highlight]
     noClasses = false
+    codeFences = false
     style = "github"
     lineNos = false

@@ -39,18 +39,21 @@ async function processFile(filePath) {
     }
     if (blocks.length === 0) return;
 
+    // 生成 Hugo 内部路径
+    let relativePath = filePath.replace(/\\/g, '/').replace(/^\.\/exampleSite\/content\//, '');
+
     for (let idx = 0; idx < blocks.length; idx++) {
         const block = blocks[idx];
-        const blockKey = `${filePath}_${idx}`;
-    try {
-        const rendered = await ec.render({
-            code: block.code,
-            language: block.language,
-            meta: block.meta,
-        });
-        const html = toHtml(rendered.renderedGroupAst);
-        const wrapped = `<div class="ec-code-block" data-language="${block.language}">${html}</div>`;
-        blocksMap[blockKey] = wrapped;
+        const blockKey = `${relativePath}_${idx}`;
+        try {
+            const rendered = await ec.render({
+                code: block.code,
+                language: block.language,
+                meta: block.meta,
+            });
+            const html = toHtml(rendered.renderedGroupAst);
+            const wrapped = `<div class="ec-code-block" data-language="${block.language}">${html}</div>`;
+            blocksMap[blockKey] = wrapped;
         } catch (err) {
             console.error(`渲染失败: ${filePath} 块 ${idx}`, err);
             blocksMap[blockKey] = `<pre><code>${escapeHtml(block.code)}</code></pre>`;

@@ -1,20 +1,14 @@
-<!-- layouts/_default/_markup/render-codeblock.html -->
-{{- $blockKey := printf "%s_%d" $.Page.File.Path .Ordinal -}}
-{{- $ecData := site.Data.ec_blocks -}}
-{{- $html := index $ecData $blockKey -}}
+{{- /* 获取当前页面的相对路径（Hugo 内部路径，如 posts/md.md） */ -}}
+{{- $filePath := .Page.File.Path -}}
+{{- $index := .Ordinal -}}
+{{- $key := printf "%s_%d" $filePath $index -}}
 
-{{- if $html -}}
-    <div class="ec-code-block" data-language="{{ .Type }}">
-        {{- $html | safeHTML -}}
-    </div>
+{{- /* 从预生成的数据中取出对应 HTML */ -}}
+{{- $block := index site.Data.ec-blocks $key -}}
+
+{{- if $block -}}
+  {{- $block | safeHTML -}}
 {{- else -}}
-    {{- /* 降级方案 (Fallback) */ -}}
-    {{- $lang := .Type | default "text" -}}
-    <div class="code-block-wrapper" data-language="{{ $lang }}">
-        <button class="copy-btn" aria-label="Copy code">
-            <!-- 可以放一个漂亮的复制图标 SVG -->
-            📋
-        </button>
-        {{- transform.Highlight .Inner $lang -}}
-    </div>
+  {{- /* fallback：如果找不到，显示原始代码，或者你可以把这里改成 Chroma 的默认行为 */ -}}
+  <pre><code>{{ .Inner | htmlEscape }}</code></pre>
 {{- end -}}
