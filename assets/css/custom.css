@@ -1,7 +1,9 @@
+import '@fontsource/maple-mono';
+
 /* ========== 全局色相变量 ========== */
 :root {
     --hue: 250;
-    --code-font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    --code-font-family: 'Maple Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
 }
 
 /* ========== 代码字体 ========== */
