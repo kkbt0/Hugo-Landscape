@@ -38,7 +38,7 @@ jobs:
         run: npm ci
       - name: Run Expressive Code pre‑render
         run: |
-          npm run prebuild || echo "⚠️ prebuild failed, but continuing"
+          npm run prebuild:blocks || echo "⚠️ prebuild failed, but continuing"
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
