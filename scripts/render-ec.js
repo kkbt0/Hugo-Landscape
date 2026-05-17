@@ -8,7 +8,7 @@ const ec = new ExpressiveCodeEngine({
     themes: ['github-light', 'github-dark'],
     themeCssSelector: (theme) => theme.name === 'github-dark' ? 'html.dark' : 'html:not(.dark)',
     plugins: [
-        collapsibleSections({
+        pluginCollapsibleSections({
             collapsedLabel: '…',
             expandedLabel: '▼',
         }),

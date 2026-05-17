@@ -36,8 +36,6 @@ jobs:
           cache: 'npm'
       - name: Install Node.js dependencies
         run: npm ci
-      - name: Build UnoCSS styles
-        run: npm run build 
       - name: Run Expressive Code pre‑render
         run: |
           npm run prebuild || echo "⚠️ prebuild failed, but continuing"
