@@ -50,7 +50,7 @@ jobs:
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
       - name: Run Expressive Code pre‑render
         run: |
-          npm run prebuild:blocks || echo "⚠️ prebuild failed, but continuing"
+          rm exampleSite/data/ec-blocks.json && npm run prebuild:blocks || echo "⚠️ prebuild failed, but continuing"
       - name: Build with Hugo
         env:
           # For maximum backward compatibility with Hugo modules

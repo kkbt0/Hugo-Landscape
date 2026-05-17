@@ -1,0 +1,11 @@
+{{- $filePath := .Page.File.Path -}}
+{{- $index := .Ordinal -}}
+{{- $key := printf "%s_%d" $filePath $index -}}
+
+{{- $block := index site.Data "ec-blocks" $key -}}
+
+{{- if $block -}}
+  {{- $block | safeHTML -}}
+{{- else -}}
+  <pre><code>{{ .Inner | htmlEscape }}</code></pre>
+{{- end -}}
