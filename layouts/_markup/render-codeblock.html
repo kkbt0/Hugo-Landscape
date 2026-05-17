@@ -4,11 +4,11 @@
 {{- $key := printf "%s_%d" $filePath $index -}}
 
 {{- /* 从预生成的数据中取出对应 HTML */ -}}
-{{- $block := index site.Data.ec-blocks $key -}}
+{{- $block := index site.Data "ec-blocks" $key -}}
 
 {{- if $block -}}
   {{- $block | safeHTML -}}
 {{- else -}}
-  {{- /* fallback：如果找不到，显示原始代码，或者你可以把这里改成 Chroma 的默认行为 */ -}}
+  {{- /* fallback：如果找不到，显示原始代码 */ -}}
   <pre><code>{{ .Inner | htmlEscape }}</code></pre>
 {{- end -}}
