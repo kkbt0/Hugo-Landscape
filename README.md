@@ -4,6 +4,9 @@ Hugo Theme Hugo-Landscape https://github.com/kkbt0/Hugo-Landscape
 
 Demo https://kkbt0.github.io/Hugo-Landscape/
 
+文档可见 docs 目录和 [https://www.ftls.xyz/docs/somnia/somnia/](https://www.ftls.xyz/docs/somnia/somnia/)
+
+
 ## Features
 
 Use Unocss and Swup
