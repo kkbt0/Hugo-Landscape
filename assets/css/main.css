@@ -9,6 +9,7 @@
 /* 代码块主题 */
 @import "code/vs.css";
 @import "code/onedark.css";
+@import "code/ec-code.css";
 
 @import "tailwind.out.css";
 @import "transition.css";
