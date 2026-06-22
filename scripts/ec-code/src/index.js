@@ -20,7 +20,7 @@ import { fileURLToPath } from 'url';
 // const projectRoot = path.resolve(__dirname, '..');
 
 // 从 cli 获取运行目录
-const projectRoot = process.argv[2];
+const projectRoot = process.argv[2]||".";
 
 // Expressive Code 配置
 const ecOptions = {
