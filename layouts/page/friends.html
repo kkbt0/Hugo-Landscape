@@ -1,5 +1,7 @@
 {{ define "main" }}
-<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+<!-- [TODO] 去除内联样式 -->
+<!-- [TODO] 去除 js 控制 css -->
+<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32" x-data="friendsComponent()">
   <div class="card-base z-10 px-9 py-6 relative w-full ">
     <div id="friends-list" style="display:grid;grid-template-columns:repeat(2,1fr);gap:2rem 1.5rem;margin:1rem 0;">
       {{ range .Site.Data.friends }}
@@ -8,7 +10,7 @@
           <img src="{{ .imgurl }}" alt="站点头像" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div style="flex-grow:1;width:100%;">
-          <div style="font-weight:700;transition:color 0.2s;font-size:1.125rem;color:var(--deep-text);margin-bottom:0.25rem;">{{ .title }}</div>
+          <div style="font-weight:700;transition:color 0.2s;font-size:1.125rem;margin-bottom:0.25rem;" class="dark:text-neutral-50">{{ .title }}</div>
           <div style="color:oklch(0.5 0.02 var(--hue));font-size:0.875rem;font-weight:500;">{{ .desc }}</div>
         </div>
         <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" style="display:flex;width:3.25rem;border-radius:0.5rem;background:var(--enter-btn-bg);flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.background='var(--enter-btn-bg-hover)'" onmouseout="this.style.background='var(--enter-btn-bg-hover)'" onmousedown="this.style.background='var(--enter-btn-bg-active)'" onmouseup="this.style.background='var(--enter-btn-bg-hover)'">
@@ -21,31 +23,35 @@
     </div>
   </div>
 </div>
-
-<!-- [TODO] Swupjs 无法正确加载 -->
-<!-- [TODO] 暗色模式显示异常 -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    var container = document.getElementById('friends-list');
-    if (!container) return;
-    var cards = Array.from(container.children);
-    for (var i = cards.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = cards[i]; cards[i] = cards[j]; cards[j] = temp;
+<script x-js-load>
+  function friendsComponent() {
+    return {
+      init() {
+          this.randomOrder();
+          this.css();
+      },
+      randomOrder() {
+        let container = document.getElementById('friends-list');
+        if (!container) return;
+        let cards = Array.from(container.children);
+        for (let i = cards.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          let temp = cards[i]; cards[i] = cards[j]; cards[j] = temp;
+        }
+        cards.forEach(function (card) { container.appendChild(card); });
+      },
+      // 响应式：小于 640px 时改为单列
+      css() {
+        let mq = window.matchMedia('(min-width: 640px)');
+        function update(e) {
+          let el = document.getElementById('friends-list');
+          if (!el) return;
+          el.style.gridTemplateColumns = e.matches ? 'repeat(2, 1fr)' : 'repeat(1, 1fr)';
+        }
+        mq.addEventListener('change', update);
+        update(mq);
+      }
     }
-    cards.forEach(function(card) { container.appendChild(card); });
-});
-
-// 响应式：小于 640px 时改为单列
-(function() {
-    var mq = window.matchMedia('(min-width: 640px)');
-    function update(e) {
-        var el = document.getElementById('friends-list');
-        if (!el) return;
-        el.style.gridTemplateColumns = e.matches ? 'repeat(2, 1fr)' : 'repeat(1, 1fr)';
-    }
-    mq.addEventListener('change', update);
-    update(mq);
-})();
+  }
 </script>
 {{ end }}

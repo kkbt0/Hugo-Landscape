@@ -1,6 +1,7 @@
 // Alpinejs components script
 // 全局状态
 document.addEventListener('alpine:init', () => {
+    Alpine.plugin(somnia.plugin.JSLoad);
     Alpine.store('somnia', {
         theme: localStorage.getItem('theme') || 'system',
         isDark: document.documentElement.classList.contains('dark'),
