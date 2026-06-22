@@ -15,9 +15,12 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // 定位项目根
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const projectRoot = path.resolve(__dirname, '..');
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+// const projectRoot = path.resolve(__dirname, '..');
+
+// 从 cli 获取运行目录
+const projectRoot = process.argv[2];
 
 // Expressive Code 配置
 const ecOptions = {

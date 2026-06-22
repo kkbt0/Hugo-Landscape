@@ -12,3 +12,12 @@ pf:
 
 update:
     ~/kkbt.work/bin/llrt scripts/version.js 
+
+ec:
+    bun run scripts/ec-code/dist/ec-code.js .
+
+ec-build:
+    cd scripts/ec-code/ && bun run build.js
+
+ec-dev:
+    bun run scripts/ec-code/src/index.js .

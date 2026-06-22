@@ -1,3 +1,13 @@
+<!--  expressive-code  -->
+{{- $origPath := .Page.File.Path -}}
+{{- $fixedPath := $origPath | replaceRE "\\\\" "/" -}}
+{{- $key := printf "%s_%d" $fixedPath .Ordinal -}}
+{{- $block := index site.Data "ec-blocks" $key -}}
+{{- if $block -}}
+  {{- $block | safeHTML -}}
+{{- else -}}
+
+<!-- Hugo 内置渲染  -->
 <!-- Attributes Inner Options  Ordinal Page PageInner Position Type-->
 <!-- Attributes {{ .Attributes }}<br>
 Inner {{ .Inner }}<br>
@@ -74,3 +84,7 @@ Type {{ .Type }}<br> -->
     <figcaption class="header"></figcaption>
     <pre data-language="{{$title}}" class="wrap" style="--ecMaxLine:36ch"><code>{{ delimit $rendered "\n" | safeHTML }}</code></pre>
 </figure>
+
+
+
+{{- end -}}
