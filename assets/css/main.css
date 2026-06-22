@@ -7,6 +7,7 @@
 @import "markdown-extend.css";
 
 /* 代码块主题 */
+/* [TODO] 修复亮色代码块样式 */
 @import "code/vs.css";
 @import "code/onedark.css";
 @import "code/ec-code.css";
