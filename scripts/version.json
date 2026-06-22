@@ -1,10 +1,10 @@
 {
-  "updateDate": "2026-05-15T11:47:36.019Z",
+  "updateDate": "2026-06-22T04:15:06.837Z",
   "dependencies": {
     "swup": {
       "url": "https://unpkg.com/swup@4",
-      "remote": "/swup@4.9.0/dist/Swup.umd.js",
-      "local": "/swup@4.9.0/dist/Swup.umd.js",
+      "remote": "/swup@4.9.2/dist/Swup.umd.js",
+      "local": "/swup@4.9.2/dist/Swup.umd.js",
       "path": "Somnia/assets/js/swup/Swup.umd.js"
     },
     "swup/preload-plugin": {
