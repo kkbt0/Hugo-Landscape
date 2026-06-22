@@ -1,0 +1,35 @@
+{
+  "name": "EC-Code",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "build-codeblocks.js",
+  "scripts": {
+    "prebuild:blocks": "node scripts/build-codeblocks.js",
+    "build": "npm run prebuild:blocks && hugo --minify",
+    "start": "npm run prebuild:blocks && hugo server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "packageManager": "bun",
+  "devDependencies": {
+    "@expressive-code/plugin-collapsible-sections": "^0.42.0",
+    "@expressive-code/plugin-frames": "^0.42.0",
+    "@expressive-code/plugin-shiki": "^0.42.0",
+    "glob": "^13.0.6",
+    "hast-util-to-html": "^9.0.5",
+    "rehype-expressive-code": "^0.42.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.1.0"
+  },
+  "dependencies": {
+    "@expressive-code/plugin-line-numbers": "^0.42.0",
+    "@fontsource/maple-mono": "^5.2.6",
+    "@shikijs/themes": "^1.29.2",
+    "ec-lang-logo": "^1.0.5",
+    "expressive-code": "^0.42.0"
+  }
+}

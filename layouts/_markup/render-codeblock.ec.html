@@ -1,0 +1,10 @@
+{{- $origPath := .Page.File.Path -}}
+{{- $fixedPath := $origPath | replaceRE "\\\\" "/" -}}
+{{- $key := printf "%s_%d" $fixedPath .Ordinal -}}
+{{- $block := index site.Data "ec-blocks" $key -}}
+
+{{- if $block -}}
+  {{- $block | safeHTML -}}
+{{- else -}}
+  <pre><code>{{ .Inner | htmlEscape }}</code></pre>
+{{- end -}}
