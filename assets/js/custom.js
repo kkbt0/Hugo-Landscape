@@ -15,10 +15,10 @@ BASE_URL = '/Hugo-Landscape';
 SOMNIA_LIBS.pagefind.js = `${BASE_URL}/pagefind/pagefind.js`;
 
 // PageInitCustom DOMContentLoaded 时执行
-Somnia.prototype.PageInitCustom = function () {
+Somnia.PageInitCustom = function () {
     console.log("[Somnia] 你好，世界");
 }
 // Swupjs 初次加载和每次切换页面都会执行
-Somnia.prototype.swupPageInitCustom = function () {
+Somnia.swupPageInitCustom = function () {
     console.log("[Swup] Page View", location.pathname);
 }

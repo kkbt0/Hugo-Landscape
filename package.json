@@ -13,5 +13,12 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.20",
     "tailwindcss": "^3.4.19"
+  },
+  "dependencies": {
+    "@swup/scroll-plugin": "^4.0.0",
+    "alpinejs": "^3.15.12",
+    "async-alpine": "^2.0.3",
+    "medium-zoom": "^1.1.0",
+    "swup": "^4.9.2"
   }
 }

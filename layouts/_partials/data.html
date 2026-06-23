@@ -1,4 +1,4 @@
-{{- $data := slice -}}
+{{- $data := .Page.Store.Get "libs" | default slice -}}
 
 {{- if .Params.math -}}
 {{- $data = $data | append  "katex" -}}

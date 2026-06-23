@@ -1,18 +1,7 @@
 // Alpinejs components script
-// 全局状态
-document.addEventListener('alpine:init', () => {
-    Alpine.plugin(somnia.plugin.JSLoad);
-    Alpine.store('somnia', {
-        theme: localStorage.getItem('theme') || 'system',
-        isDark: document.documentElement.classList.contains('dark'),
-        menuOpen: false,
-        init() {
-            // console.log("[Somnia] [Init]",this.theme, this.isDark);
-        },
-        // 统一调用接口，方便未来改为全局事件总线 由 Somnia 负责
-    });
-
-})
+import Alpine from './libs/alpinejs.esm.js';
+import { BANNER_HEIGHT } from './variable.js';
+import Somnia from './Somnia.js';
 
 // 处理页面数据 负责动态加载 js 等
 function somniaData() {
@@ -23,11 +12,11 @@ function somniaData() {
                 console.log("[Somnia] [Data]", data.trim());
             }
             if (data.includes("katex")) {
-                somnia.libs.katex.run(document.getElementById("content-wrapper"));
+                Somnia.libs.katex.run(document.getElementById("content-wrapper"));
             }
-            // 由 render-codeblock-mermaid.html 运行
             // if (data.includes("mermaid")) {
-            //     somnia.libs.mermaid.run();
+            //     Somnia.libs.mermaid.run();
+            //     this.$watch('$store.somnia.isDark', (n, o) => Somnia.libs.mermaid.run());
             // }
             if (data.includes("home")) {
                 document.body.classList.add("lg:is-home");
@@ -38,18 +27,17 @@ function somniaData() {
     }
 }
 
-Somnia.prototype.axd = {};
-const axd = Somnia.prototype.axd;
+const axd = {};
 
 // App 组件 Apline.js x-data
-Somnia.prototype.axd.hi = function () {
+axd.hi = function () {
     return {
         init() { console.log("[Somnia] [Hi]"); }
     }
 }
 
 
-Somnia.prototype.axd.theme = function () {
+axd.theme = function () {
     return {
         isHovered: false,
         init() {
@@ -86,7 +74,7 @@ Somnia.prototype.axd.theme = function () {
 }
 
 
-Somnia.prototype.axd.search = function () {
+axd.search = function () {
     return {
         init() {
             this.$watch('keyword', (value) => {
@@ -97,10 +85,10 @@ Somnia.prototype.axd.search = function () {
         keyword: "",
         results: [],
         searchInit() {
-            somnia.libs.pagefind.load();
+            Somnia.libs.pagefind.load();
         },
         async doSearch() {
-            this.results = await somnia.libs.pagefind.run(this.keyword);
+            this.results = await Somnia.libs.pagefind.run(this.keyword);
         },
         seachBtnClick() {
             this.planelOpen = !this.planelOpen;
@@ -112,7 +100,7 @@ Somnia.prototype.axd.search = function () {
     }
 }
 
-Somnia.prototype.axd.backToTop = function () {
+axd.backToTop = function () {
     return {
         hide: true,
         onScroll() {
@@ -228,7 +216,7 @@ class TableOfContents extends HTMLElement {
 
             if (this.isInRange(offsetTop, 0, window.innerHeight)
                 || this.isInRange(offsetBottom, 0, window.innerHeight)
-                || (offsetTop < 0 && offsetBottom > window.innerHeight)) {                    
+                || (offsetTop < 0 && offsetBottom > window.innerHeight)) {
                 this.markActiveHeading(i);
             }
             else if (offsetTop > window.innerHeight) break;
@@ -321,3 +309,5 @@ class TableOfContents extends HTMLElement {
 if (!customElements.get("table-of-contents")) {
     customElements.define("table-of-contents", TableOfContents);
 }
+
+export { somniaData, axd };

@@ -17,7 +17,7 @@ export function artalkCommentComponent() {
         },
         initArtalk() {
             // 查找 head css 是否存在
-            document.head.querySelector('link[data-somnia="artalk.css"]') !== null ? null : Somnia.prototype.loadResource({ rel: 'stylesheet', href: "https://cdnjs.cloudflare.com/ajax/libs/artalk/2.9.1/Artalk.css", dataSomnia: 'artalk.css' });
+            document.head.querySelector('link[data-somnia="artalk.css"]') !== null ? null : Somnia.loadResource({ rel: 'stylesheet', href: "https://cdnjs.cloudflare.com/ajax/libs/artalk/2.9.1/Artalk.css", dataSomnia: 'artalk.css' });
             this.artalk = new Artalk({
                 el: '#artalk-comments',     // 绑定DOM元素
                 server: 'http://127.0.0.1:23366',
